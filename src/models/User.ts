@@ -5,6 +5,7 @@ export interface IUser extends Document {
     email: string;
     password: string;
     role: string;
+    crfa: string;
     created_at: Date;
     updated_at: Date;
 }
@@ -14,6 +15,7 @@ const UserSchema: Schema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
+    crfa: { type: String, required: false },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
 });
