@@ -5,7 +5,6 @@ export interface IPatient extends Document {
   therapistId: mongoose.Types.ObjectId;
   birthDate: Date;
   diagnosis: string;
-  status: 'ativo' | 'suspenso' | 'alta' | 'cancelado';
   createdAt: Date;
 }
 
@@ -14,7 +13,6 @@ const PatientSchema: Schema = new Schema({
   therapistId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   birthDate: { type: Date, required: true },
   diagnosis: { type: String },
-  status: { type: String, enum: ['ativo', 'suspenso', 'alta', 'cancelado'], default: 'ativo' },
   createdAt: { type: Date, default: Date.now }
 });
 
