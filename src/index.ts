@@ -5,6 +5,8 @@ import { connectToGridFS } from './utils/gridfs';
 import authRoutes from './routes/auth.routes';
 import therapistRoutes from './routes/therapist.routes';
 import patientRoutes from './routes/patient.routes';
+import exerciseRoutes from './routes/exercise.routes';
+import anamnese from './routes/anamnese.routes';
 import cors from 'cors';
 
 const app = express();
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/therapists', therapistRoutes);
 app.use('/patients', patientRoutes);
+app.use('/exercises', exerciseRoutes);
+app.use('/anamnese', anamnese);
 
 // Rota de teste
 app.get('/', (req, res) => {
