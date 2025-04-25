@@ -5,12 +5,11 @@ export class ExerciseService {
     return Exercise.create(data);
   }
 
-  static async getAllByTherapist(therapistId: string) {
-    return Exercise.find({ therapistId });
+  static async getAllByCategory(categoryId: string) {
+    return Exercise.find({ categoryId });
   }
 
   static async update(id: string, data: any) {
     return Exercise.findByIdAndUpdate(id, data, { new: true });
   }
-  
 }

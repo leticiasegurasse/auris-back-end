@@ -6,7 +6,8 @@ import authRoutes from './routes/auth.routes';
 import therapistRoutes from './routes/therapist.routes';
 import patientRoutes from './routes/patient.routes';
 import exerciseRoutes from './routes/exercise.routes';
-import anamnese from './routes/anamnese.routes';
+import anamneseRoutes from './routes/anamnese.routes';
+import categoryRoutes from './routes/category.routes';
 import cors from 'cors';
 
 const app = express();
@@ -24,7 +25,9 @@ app.use('/auth', authRoutes);
 app.use('/therapists', therapistRoutes);
 app.use('/patients', patientRoutes);
 app.use('/exercises', exerciseRoutes);
-app.use('/anamnese', anamnese);
+app.use('/anamnese', anamneseRoutes);
+app.use('/categories', categoryRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('API is running 🚀');

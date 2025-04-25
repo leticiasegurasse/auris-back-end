@@ -11,7 +11,7 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/', authMiddleware, upload.single('audio'), ExerciseController.create);
-router.get('/', authMiddleware, ExerciseController.getAllByTherapist);
+router.get('/', authMiddleware, ExerciseController.getAllByCategory);
 router.get('/audio/:id', async (req, res) => {
     try {
       const { id } = req.params;
