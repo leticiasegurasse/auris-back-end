@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { connectToDatabase } from './database';
 import { connectToGridFS } from './utils/gridfs';
 import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
 import therapistRoutes from './routes/therapist.routes';
 import patientRoutes from './routes/patient.routes';
 import exerciseRoutes from './routes/exercise.routes';
@@ -27,6 +28,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 app.use('/therapists', therapistRoutes);
 app.use('/patients', patientRoutes);
 app.use('/exercises', exerciseRoutes);
