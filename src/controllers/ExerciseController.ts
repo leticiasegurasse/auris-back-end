@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getBucket } from '../utils/gridfs';
 import { ExerciseBusiness } from '../business/ExerciseBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+import mongoose from 'mongoose';
 
 export class ExerciseController {
   static async create(req: AuthenticatedRequest, res: Response) {
@@ -11,6 +12,9 @@ export class ExerciseController {
 
       if (!file) throw new Error('Audio file is required');
       if (!categoryId) throw new Error('categoryId is required');
+
+      // Convertendo categoryId para ObjectId
+      const convertedCategoryId = new mongoose.Types.ObjectId(categoryId);
 
       // Salva o arquivo no GridFS
       const bucket = getBucket();
@@ -27,7 +31,7 @@ export class ExerciseController {
           title,
           description,
           instructions,
-          categoryId,
+          categoryId: convertedCategoryId, // 👈 aqui mandando como ObjectId
           audioReference: fileId.toString(),
         });
 
@@ -107,4 +111,22 @@ export class ExerciseController {
       res.status(400).json({ message: error.message });
     }
   }
+  
+  static async getById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const exercise = await ExerciseBusiness.getById(id);
+  
+      if (!exercise) {
+        res.status(404).json({ message: 'Exercício não encontrado' });
+        return;
+      }
+  
+      res.json(exercise);
+    } catch (error: any) {
+      console.error('[GET EXERCISE BY ID ERROR]', error);
+      res.status(400).json({ message: 'Erro ao buscar exercício', details: error.message });
+    }
+  }
+  
 }
