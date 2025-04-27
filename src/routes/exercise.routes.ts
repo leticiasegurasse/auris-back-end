@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
-// Armazena o arquivo na memória (buffer)
+// Armazena o arquivo na memória
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/', authMiddleware, upload.single('file'), ExerciseController.create);
