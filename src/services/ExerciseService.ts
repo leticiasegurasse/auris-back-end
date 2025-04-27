@@ -12,4 +12,8 @@ export class ExerciseService {
   static async update(id: string, data: any) {
     return Exercise.findByIdAndUpdate(id, data, { new: true });
   }
+
+  static async getById(id: string) {
+    return Exercise.findById(id);
+  }
 }

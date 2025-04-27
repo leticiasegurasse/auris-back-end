@@ -7,10 +7,10 @@ import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
-// Armazena o arquivo na memória (buffer)
+// Armazena o arquivo na memória
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.post('/', authMiddleware, upload.single('audio'), ExerciseController.create);
+router.post('/', authMiddleware, upload.single('file'), ExerciseController.create);
 router.get('/category/:categoryId', authMiddleware, ExerciseController.getAllByCategory);
 router.get('/audio/:id', async (req, res) => {
     try {
@@ -31,7 +31,7 @@ router.get('/audio/:id', async (req, res) => {
       res.status(400).json({ message: 'ID inválido' });
     }
 });
-router.put('/:id', authMiddleware, upload.single('audio'), ExerciseController.update);
-
+router.get('/:id', authMiddleware, ExerciseController.getById);
+router.put('/:id', authMiddleware, upload.single('file'), ExerciseController.update);
 
 export default router;

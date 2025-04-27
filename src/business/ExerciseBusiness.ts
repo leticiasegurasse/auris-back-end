@@ -12,4 +12,8 @@ export class ExerciseBusiness {
   static async update(id: string, data: any) {
     return ExerciseService.update(id, data);
   }
+
+  static async getById(id: string) {
+    return ExerciseService.getById(id);
+  }
 }
