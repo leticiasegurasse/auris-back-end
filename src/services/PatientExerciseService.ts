@@ -6,7 +6,9 @@ export class PatientExerciseService {
   }
 
   static async getAllByPatient(patientId: string) {
-    return PatientExercise.find({ patientId });
+    return PatientExercise.find({ patientId })
+      .populate('exerciseId') // 👈 adiciona isso!
+      .exec();
   }
 
   static async getById(id: string) {
