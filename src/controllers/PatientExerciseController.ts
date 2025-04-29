@@ -123,5 +123,14 @@ export class PatientExerciseController {
       res.status(400).json({ message: error.message });
     }
   }
-  
+
+  static async deleteIfPending(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const result = await PatientExerciseBusiness.deleteIfPending(id);
+      res.json(result);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

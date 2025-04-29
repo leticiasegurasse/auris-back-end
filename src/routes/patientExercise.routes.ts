@@ -19,6 +19,7 @@ router.put('/:id', authMiddleware, PatientExerciseController.update);
 // Busca os exercícios pelo id do paciente
 router.get('/patient/:patientId', authMiddleware, PatientExerciseController.getAllByPatientId);
 
-
+// Rota para deletar exercício pendente
+router.delete('/:id', authMiddleware, PatientExerciseController.deleteIfPending);
 
 export default router;
