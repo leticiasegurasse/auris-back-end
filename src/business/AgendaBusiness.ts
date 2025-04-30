@@ -40,4 +40,14 @@ export class AgendaBusiness {
     if (!deleted) throw new Error('Failed to delete agenda');
     return deleted;
   }
+
+  // Retorna agendas por fonoaudiólogo
+  static async getByTherapist(therapistId: string): Promise<IAgenda[]> {
+    return AgendaService.getAgendasByTherapist(therapistId);
+  }
+
+  // Retorna agendas por paciente
+  static async getByPatient(patientId: string): Promise<IAgenda[]> {
+    return AgendaService.getAgendasByPatient(patientId);
+  }
 }
