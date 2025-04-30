@@ -129,4 +129,13 @@ export class ExerciseController {
     }
   }
   
+  static async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      await ExerciseBusiness.delete(id);
+      res.json({ message: 'Exercício excluído com sucesso' });
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

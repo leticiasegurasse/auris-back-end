@@ -33,5 +33,6 @@ router.get('/audio/:id', async (req, res) => {
 });
 router.get('/:id', authMiddleware, ExerciseController.getById);
 router.put('/:id', authMiddleware, upload.single('file'), ExerciseController.update);
+router.delete('/:id', authMiddleware, ExerciseController.delete);
 
 export default router;

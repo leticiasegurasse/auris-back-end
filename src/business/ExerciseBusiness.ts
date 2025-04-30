@@ -16,4 +16,8 @@ export class ExerciseBusiness {
   static async getById(id: string) {
     return ExerciseService.getById(id);
   }
+
+  static async delete(id: string) {
+    return ExerciseService.delete(id);
+  }
 }
