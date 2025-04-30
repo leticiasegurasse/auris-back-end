@@ -106,4 +106,31 @@ export class PatientExerciseController {
     }
   }
   
+  static async getAllByPatientId(req: AuthenticatedRequest, res: Response) {
+    try {
+      const { patientId } = req.params;
+      const result = await PatientExerciseBusiness.getAllByPatient(patientId);
+      const baseUrl = `${req.protocol}://${req.get('host')}`;
+  
+      const response = result.map((item: any) => ({
+        ...item.toObject(),
+        audioUrl: item.audioResponse ? `${baseUrl}/patient-exercises/audio/${item.audioResponse}` : null
+      }));
+  
+      res.json(response);
+    } catch (error: any) {
+      console.error('[GET PATIENT EXERCISES ERROR]', error);
+      res.status(400).json({ message: error.message });
+    }
+  }
+
+  static async deleteIfPending(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const result = await PatientExerciseBusiness.deleteIfPending(id);
+      res.json(result);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

@@ -6,7 +6,9 @@ export class PatientExerciseService {
   }
 
   static async getAllByPatient(patientId: string) {
-    return PatientExercise.find({ patientId });
+    return PatientExercise.find({ patientId })
+      .populate('exerciseId') // 👈 adiciona isso!
+      .exec();
   }
 
   static async getById(id: string) {
@@ -30,4 +32,18 @@ export class PatientExerciseService {
     return exercise?.therapistReview;
   }
 
+  static async deleteIfPending(id: string) {
+    const exercise = await PatientExercise.findById(id);
+    
+    if (!exercise) {
+      throw new Error('Exercício não encontrado');
+    }
+
+    if (exercise.status !== 'pending') {
+      throw new Error('Apenas exercícios pendentes podem ser excluídos');
+    }
+
+    await PatientExercise.findByIdAndDelete(id);
+    return { message: 'Exercício excluído com sucesso' };
+  }
 }

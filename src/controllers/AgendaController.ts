@@ -14,10 +14,22 @@ export class AgendaController {
     }
   }
 
-  // Retorna todas as agendas cadastradas
-  static async getAll(req: Request, res: Response) {
+  // Retorna todas as agendas do fonoaudiólogo logado
+  static async getAll(req: AuthenticatedRequest, res: Response) {
     try {
-      const agendas = await AgendaBusiness.getAll();
+      const therapistId = req.user?.id;
+      const agendas = await AgendaBusiness.getByTherapist(therapistId);
+      res.json(agendas);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
+  // Retorna todas as agendas de um paciente específico
+  static async getByPatient(req: Request, res: Response) {
+    try {
+      const { patientId } = req.params;
+      const agendas = await AgendaBusiness.getByPatient(patientId);
       res.json(agendas);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

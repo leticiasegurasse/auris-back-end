@@ -60,7 +60,7 @@ export class CategoryController {
     try {
       const { id } = req.params;
       await CategoryBusiness.delete(id);
-      res.status(204).send();
+      res.json({ message: 'Categoria excluída com sucesso' });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }

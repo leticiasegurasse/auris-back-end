@@ -12,8 +12,14 @@ router.get('/:id/review', authMiddleware, PatientExerciseController.getReview);
 
 // Depois as genéricas
 router.post('/', authMiddleware, PatientExerciseController.create);
+// Busca os exercicios do paciente logado
 router.get('/', authMiddleware, PatientExerciseController.getAllByPatient);
 router.put('/:id', authMiddleware, PatientExerciseController.update);
 
+// Busca os exercícios pelo id do paciente
+router.get('/patient/:patientId', authMiddleware, PatientExerciseController.getAllByPatientId);
+
+// Rota para deletar exercício pendente
+router.delete('/:id', authMiddleware, PatientExerciseController.deleteIfPending);
 
 export default router;

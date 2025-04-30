@@ -24,5 +24,8 @@ export class PatientExerciseBusiness {
   static async getReview(id: string) {
     return PatientExerciseService.getReview(id);
   }
-  
+
+  static async deleteIfPending(id: string) {
+    return PatientExerciseService.deleteIfPending(id);
+  }
 }
