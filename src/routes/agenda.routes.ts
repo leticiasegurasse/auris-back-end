@@ -6,11 +6,11 @@ const router = express.Router();
 
 router.post('/', authMiddleware, AgendaController.create);
 
+router.get('/:id', authMiddleware, AgendaController.getById);
+
 router.get('/', authMiddleware, AgendaController.getAll);
 
 router.get('/patient/:patientId', authMiddleware, AgendaController.getByPatient);
-
-router.get('/:id', authMiddleware, AgendaController.getById);
 
 router.put('/:id', authMiddleware, AgendaController.update);
 
