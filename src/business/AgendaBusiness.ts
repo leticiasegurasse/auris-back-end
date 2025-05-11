@@ -1,5 +1,6 @@
 import { AgendaService } from '../services/AgendaService';
 import { IAgenda } from '../models/Agenda';
+import mongoose from 'mongoose';
 
 interface CreateAgendaDTO {
   patient: string;

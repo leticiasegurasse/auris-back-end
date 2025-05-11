@@ -35,7 +35,13 @@ export class AgendaService {
   // Busca agendas por fonoaudiólogo
   static async getAgendasByTherapist(therapistId: string): Promise<IAgenda[]> {
     return Agenda.find({ therapist: therapistId })
-      .populate('patient')
+      .populate({
+        path: 'patient',
+        populate: {
+          path: 'userId',
+          model: 'User'
+        }
+      })
       .populate('therapist');
   }
 

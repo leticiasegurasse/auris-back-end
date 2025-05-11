@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import { ExerciseController } from '../controllers/ExerciseController';
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
 import { getBucket } from '../utils/gridfs';
 import { ObjectId } from 'mongodb';
 
@@ -10,7 +11,7 @@ const router = express.Router();
 // Armazena o arquivo na memória
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.post('/', authMiddleware, upload.single('file'), ExerciseController.create);
+router.post('/', authMiddleware, upload.single('file'), LoggingMiddleware('Exercise'), ExerciseController.create);
 router.get('/category/:categoryId', authMiddleware, ExerciseController.getAllByCategory);
 router.get('/audio/:id', async (req, res) => {
     try {
@@ -32,7 +33,7 @@ router.get('/audio/:id', async (req, res) => {
     }
 });
 router.get('/:id', authMiddleware, ExerciseController.getById);
-router.put('/:id', authMiddleware, upload.single('file'), ExerciseController.update);
-router.delete('/:id', authMiddleware, ExerciseController.delete);
+router.put('/:id', authMiddleware, upload.single('file'), LoggingMiddleware('Exercise'), ExerciseController.update);
+router.delete('/:id', authMiddleware, LoggingMiddleware('Exercise'), ExerciseController.delete);
 
 export default router;

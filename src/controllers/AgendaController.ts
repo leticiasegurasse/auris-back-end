@@ -18,6 +18,7 @@ export class AgendaController {
   static async getAll(req: AuthenticatedRequest, res: Response) {
     try {
       const therapistId = req.user?.id;
+      console.log(therapistId);
       const agendas = await AgendaBusiness.getByTherapist(therapistId);
       res.json(agendas);
     } catch (error: any) {

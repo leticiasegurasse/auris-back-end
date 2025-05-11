@@ -1,4 +1,5 @@
 import PatientReport from '../models/PatientReport';
+import mongoose from 'mongoose';
 
 export class PatientReportService {
   static async create(data: any) {
@@ -6,7 +7,16 @@ export class PatientReportService {
   }
 
   static async getAllByUser(userId: string) {
-    return PatientReport.find({ userId });
+    return PatientReport.find({ userId })
+      .populate('userId', 'name')
+      .populate({
+        path: 'patientId',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'name_user'
+        }
+      });
   }
 
   static async getById(id: string) {
@@ -17,4 +27,17 @@ export class PatientReportService {
     return PatientReport.findByIdAndUpdate(id, data, { new: true });
   }
 
+  static async getByPatientId(patientId: string) {
+    const objectId = new mongoose.Types.ObjectId(patientId);
+    return PatientReport.find({ patientId: objectId })
+      .populate('userId', 'name')
+      .populate({
+        path: 'patientId',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'name_user'
+        }
+      });
+  }
 }

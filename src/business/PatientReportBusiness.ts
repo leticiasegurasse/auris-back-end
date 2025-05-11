@@ -17,4 +17,7 @@ export class PatientReportBusiness {
     return PatientReportService.update(id, data);
   }
 
+  static async getByPatientId(patientId: string) {
+    return PatientReportService.getByPatientId(patientId);
+  }
 }
