@@ -36,7 +36,7 @@ export class ConversationController {
   static async addMessage(req: Request, res: Response) {
     try {
       const { conversationId } = req.params;
-      const { sender, content } = req.body;
+      const { sender, content, notes } = req.body;
 
       // Adiciona a mensagem do usuário
       const updated = await ConversationBusiness.addMessage(conversationId, { sender, content });
@@ -44,13 +44,30 @@ export class ConversationController {
       // Se foi o usuário que enviou, chama a API do GPT
       if (sender === 'user') {
         const messages = updated?.messages || [];
+        
+        // Pega as últimas 3 mensagens
+        const lastThreeMessages = messages.slice(-4);
+        
+        // Formata o conteúdo com o contexto
+        const formattedContent = `Siga o seguinte contexto para responder a mensagem do usuário:
+            Contexto do paciente:
+            ${notes || 'Nenhum contexto adicional fornecido'}
 
-        const gptMessages = messages.map((m: any) => ({
-            role: m.sender as 'user' | 'assistant',
-            content: m.content
-        }));
-    
-        const assistantReply = await getGPTResponse(gptMessages);
+            histórico das últimas 3 mensagens:
+            ${lastThreeMessages.map(m => `${m.sender}: ${m.content}`).join('\n')}
+
+            mensagem que deve ser respondida:
+            ${content}`;
+
+        // Cria a mensagem formatada para o GPT
+        const gptMessage = {
+          role: 'user' as const,
+          content: formattedContent
+        };
+
+        console.log("gptMessage", gptMessage);
+
+        const assistantReply = await getGPTResponse([gptMessage]);
 
         await ConversationBusiness.addMessage(conversationId, {
           sender: 'assistant',

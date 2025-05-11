@@ -14,6 +14,7 @@ import patientResponseRoutes from './routes/patientResponse.routes';
 import messageRoutes from './routes/message.routes';
 import agendaRoutes from './routes/agenda.routes';
 import anamneseRoutes from './routes/anamnese.routes';
+import logRoutes from './routes/logRoutes';
 import cors from 'cors';
 
 const app = express();
@@ -40,7 +41,7 @@ app.use('/messages', messageRoutes);
 app.use('/agenda', agendaRoutes);
 app.use('/anamnese', anamneseRoutes);
 app.use('/categories', categoryRoutes);
-
+app.use('/', logRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running 🚀');

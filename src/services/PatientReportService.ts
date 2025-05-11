@@ -7,7 +7,16 @@ export class PatientReportService {
   }
 
   static async getAllByUser(userId: string) {
-    return PatientReport.find({ userId });
+    return PatientReport.find({ userId })
+      .populate('userId', 'name')
+      .populate({
+        path: 'patientId',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'name_user'
+        }
+      });
   }
 
   static async getById(id: string) {
@@ -21,7 +30,14 @@ export class PatientReportService {
   static async getByPatientId(patientId: string) {
     const objectId = new mongoose.Types.ObjectId(patientId);
     return PatientReport.find({ patientId: objectId })
-      .populate('userId')
-      .populate('patientId');
+      .populate('userId', 'name')
+      .populate({
+        path: 'patientId',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'name_user'
+        }
+      });
   }
 }
