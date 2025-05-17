@@ -51,4 +51,9 @@ export class AgendaBusiness {
   static async getByPatient(patientId: string): Promise<IAgenda[]> {
     return AgendaService.getAgendasByPatient(patientId);
   }
+
+  // Retorna consultas futuras
+  static async getFutureConsultations(therapistId: string): Promise<IAgenda[]> {
+    return AgendaService.getFutureConsultations(therapistId);
+  }
 }

@@ -17,4 +17,7 @@ export class TherapistEvaluationService {
     return TherapistEvaluation.findByIdAndUpdate(id, data, { new: true });
   }
 
+  static async getByPatientResponseId(patientResponseId: string) {
+    return TherapistEvaluation.findOne({ patientResponseId }).populate('patientResponseId');
+  }
 }

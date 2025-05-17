@@ -55,4 +55,13 @@ export class TherapistEvaluationController {
     }
   }
 
+  static async getByPatientResponseId(req: Request, res: Response) {
+    try {
+      const { patientResponseId } = req.params;
+      const evaluation = await TherapistEvaluationBusiness.getByPatientResponseId(patientResponseId);
+      res.json(evaluation);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }
