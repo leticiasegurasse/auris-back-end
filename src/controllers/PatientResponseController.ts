@@ -119,4 +119,19 @@ export class PatientResponseController {
       res.status(400).json({ message: 'ID inválido' });
     }
   }
+
+  static async getByPatientExerciseId(req: Request, res: Response) {
+    try {
+      const { patientExerciseId } = req.params;
+      const responses = await PatientResponseBusiness.getByPatientExerciseId(patientExerciseId);
+      const baseUrl = `${req.protocol}://${req.get('host')}`;
+      const responseWithUrl = responses.map((r: any) => ({
+        ...r.toObject(),
+        audioUrl: `${baseUrl}/patient-responses/audio/${r.audioResponse}`
+      }));
+      res.json(responseWithUrl);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

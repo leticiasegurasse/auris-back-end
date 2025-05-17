@@ -70,4 +70,18 @@ export class AgendaController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  // Retorna consultas futuras
+  static async getFutureConsultations(req: AuthenticatedRequest, res: Response) {
+    try {
+      const therapistId = req.user?.id;
+      if (!therapistId) {
+        throw new Error('Usuário não autenticado');
+      }
+      const consultations = await AgendaBusiness.getFutureConsultations(therapistId);
+      res.json(consultations);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

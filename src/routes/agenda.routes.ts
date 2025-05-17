@@ -5,6 +5,8 @@ import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
 
 const router = express.Router();
 
+router.get('/future', authMiddleware, AgendaController.getFutureConsultations);
+
 router.post('/', authMiddleware, LoggingMiddleware('Agenda'), AgendaController.create);
 
 router.get('/:id', authMiddleware, AgendaController.getById);

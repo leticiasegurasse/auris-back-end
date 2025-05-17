@@ -69,4 +69,22 @@ export class AgendaService {
   static async deleteAgenda(id: string): Promise<IAgenda | null> {
     return Agenda.findByIdAndDelete(id);
   }
+
+  // Busca consultas futuras a partir do horário atual
+  static async getFutureConsultations(therapistId: string): Promise<IAgenda[]> {
+    const now = new Date();
+    return Agenda.find({ 
+      consultationDateTime: { $gte: now },
+      therapist: therapistId
+    })
+      .populate({
+        path: 'patient',
+        populate: {
+          path: 'userId',
+          model: 'User'
+        }
+      })
+      .populate('therapist')
+      .sort({ consultationDateTime: 1 });
+  }
 }

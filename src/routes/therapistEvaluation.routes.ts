@@ -9,5 +9,6 @@ router.post('/', authMiddleware, LoggingMiddleware('TherapistEvaluation'), Thera
 router.get('/', authMiddleware, TherapistEvaluationController.getAll);
 router.get('/:id', authMiddleware, TherapistEvaluationController.getById);
 router.put('/:id', authMiddleware, LoggingMiddleware('TherapistEvaluation'), TherapistEvaluationController.update);
+router.get('/patient-response/:patientResponseId', authMiddleware, TherapistEvaluationController.getByPatientResponseId);
 
 export default router;

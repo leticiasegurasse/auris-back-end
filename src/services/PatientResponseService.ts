@@ -17,4 +17,7 @@ export class PatientResponseService {
     return PatientResponse.findByIdAndUpdate(id, data, { new: true });
   }
 
+  static async getByPatientExerciseId(patientExerciseId: string) {
+    return PatientResponse.find({ patientExerciseId }).populate('patientExerciseId');
+  }
 }

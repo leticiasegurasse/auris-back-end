@@ -11,5 +11,6 @@ router.get('/', authMiddleware, PatientResponseController.getAll);
 router.get('/:id', authMiddleware, PatientResponseController.getById);
 router.put('/:id', authMiddleware, upload.single('audio'), PatientResponseController.update);
 router.get('/audio/:id', PatientResponseController.getAudio);
+router.get('/exercise/:patientExerciseId', authMiddleware, PatientResponseController.getByPatientExerciseId);
 
 export default router;
