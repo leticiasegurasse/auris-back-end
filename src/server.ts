@@ -15,7 +15,9 @@ import messageRoutes from './routes/message.routes';
 import agendaRoutes from './routes/agenda.routes';
 import anamneseRoutes from './routes/anamnese.routes';
 import logRoutes from './routes/logRoutes';
+import checkoutRoutes from './routes/checkoutRoutes';
 import cors from 'cors';
+import stripeWebhook from './webhook/stripeWebhook';
 
 const app = express();
 
@@ -26,6 +28,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// IMPORTANTE: O webhook do Stripe deve ser registrado ANTES do express.json()
+// porque ele precisa do body raw para validar a assinatura
+app.use('/stripeWebhook', stripeWebhook);
+
+// Middleware de parsing JSON deve vir DEPOIS do webhook
 app.use(express.json());
 
 app.use('/auth', authRoutes);
@@ -42,6 +50,7 @@ app.use('/agenda', agendaRoutes);
 app.use('/anamnese', anamneseRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/', logRoutes);
+app.use('/checkout', checkoutRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running 🚀');
