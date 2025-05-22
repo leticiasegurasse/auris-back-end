@@ -3,10 +3,13 @@ import { PatientBusiness } from '../business/PatientBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
 export class PatientController {
-  static async getAllByTherapist(req: AuthenticatedRequest, res: Response) {
+  static async getAllByTherapist(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
-      console.log('[THERAPIST ID from token]', req.user?.id);
+      if (!therapistId) {
+        res.status(401).json({ message: 'Therapist ID is missing in token.' });
+        return;
+      }
 
       const patients = await PatientBusiness.getAllByTherapist(therapistId);
       res.json(patients);
@@ -15,7 +18,7 @@ export class PatientController {
     }
   }
 
-  static async getById(req: Request, res: Response) {
+  static async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       const patient = await PatientBusiness.getById(id);
@@ -25,7 +28,7 @@ export class PatientController {
     }
   }
 
-  static async update(req: Request, res: Response) {
+  static async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       const updates = req.body;

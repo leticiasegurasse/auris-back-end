@@ -14,14 +14,23 @@ export class AuthController {
 
   static async login(req: Request, res: Response) {
     const { email, password } = req.body;
-
+  
     try {
       const result = await AuthBusiness.login({ email, password });
-      res.status(200).json(result);
+  
+      if ('error' in result && result.error) {
+        return res.status(401).json({
+          message: result.message,
+          paymentLink: result.paymentLink // pode ser undefined se não for o caso de assinatura
+        });
+      }
+  
+      return res.status(200).json(result);
     } catch (error: any) {
-      res.status(401).json({ message: error.message });
+      res.status(500).json({ message: 'Erro interno no servidor.' });
     }
   }
+  
 
   static async verifyToken(req: Request, res: Response) {
     try {

@@ -3,9 +3,14 @@ import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 import { CategoryBusiness } from '../business/CategoryBusiness';
 
 export class CategoryController {
-  static async create(req: AuthenticatedRequest, res: Response) {
+  static async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
+      if (!therapistId) {
+        res.status(401).json({ message: 'Therapist ID is missing in token.' });
+        return;
+      }
+
       const { title, description } = req.body;
 
       const category = await CategoryBusiness.create({
@@ -20,9 +25,14 @@ export class CategoryController {
     }
   }
 
-  static async getAllByTherapist(req: AuthenticatedRequest, res: Response) {
+  static async getAllByTherapist(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
+      if (!therapistId) {
+        res.status(401).json({ message: 'Therapist ID is missing in token.' });
+        return;
+      }
+
       const categories = await CategoryBusiness.getAllByTherapist(therapistId);
       res.json(categories);
     } catch (error: any) {
@@ -30,7 +40,7 @@ export class CategoryController {
     }
   }
 
-  static async getById(req: Request, res: Response) {
+  static async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       const category = await CategoryBusiness.getById(id);
@@ -40,7 +50,7 @@ export class CategoryController {
     }
   }
 
-  static async update(req: Request, res: Response) {
+  static async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       const { title, description } = req.body;
@@ -56,7 +66,7 @@ export class CategoryController {
     }
   }
 
-  static async delete(req: Request, res: Response) {
+  static async delete(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       await CategoryBusiness.delete(id);
