@@ -13,4 +13,8 @@ export class TherapistBusiness {
     if (!updated) throw new Error('Failed to update therapist');
     return updated;
   }
+
+  static async getAll(): Promise<ITherapist[]> {
+    return TherapistService.getAllTherapists();
+  }
 }

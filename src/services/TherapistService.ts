@@ -44,4 +44,8 @@ export class TherapistService {
   static async updateTherapist(id: string, updates: Partial<ITherapist>): Promise<ITherapist | null> {
     return Therapist.findByIdAndUpdate(id, updates, { new: true });
   }
+
+  static async getAllTherapists(): Promise<ITherapist[]> {
+    return Therapist.find().populate('userId');
+  }
 }

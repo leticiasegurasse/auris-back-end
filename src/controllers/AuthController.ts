@@ -27,6 +27,9 @@ export class AuthController {
   
       return res.status(200).json(result);
     } catch (error: any) {
+      if (error.message === 'Invalid email or password.') {
+        return res.status(401).json({ message: 'Email ou senha inválidos' });
+      }
       res.status(500).json({ message: 'Erro interno no servidor.' });
     }
   }

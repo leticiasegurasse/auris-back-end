@@ -1,5 +1,7 @@
 import Stripe from 'stripe';
 
+const BASE_URL = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
+
 export const stripe = new Stripe(process.env.STRIPE_SECRET! as string, {
     httpClient: Stripe.createFetchHttpClient(),
 });
@@ -35,8 +37,8 @@ export const generateCheckout = async (userId: string, email: string) => {
             mode: 'subscription',
             client_reference_id: userId,
             customer: customer.id,
-            success_url: `http://localhost:5173/done`,
-            cancel_url: `http://localhost:5173/error`,
+            success_url: `${BASE_URL}/done`,
+            cancel_url: `${BASE_URL}/error`,
             line_items: [
                 {
                     price: process.env.STRIPE_ID_PLAN,

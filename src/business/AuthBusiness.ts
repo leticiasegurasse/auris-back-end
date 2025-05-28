@@ -4,6 +4,9 @@ import { JwtService } from '../utils/auth/jwt.service';
 import { TherapistService } from '../services/TherapistService';
 import { PatientService } from '../services/PatientService';
 import { generateCheckout } from '../utils/stripe';
+import { ITherapist } from '../models/Therapist';
+import { IPatient } from '../models/Patient';
+import mongoose from 'mongoose';
 
 interface RegisterInput {
   name_user: string;
@@ -84,12 +87,14 @@ export class AuthBusiness {
     const token = await jwt.sign({ id: user._id, role: user.role });
   
     let stripeSubscriptionStatus: string | null = null;
+    let specificId: string | null = null;
   
     if (user.role === 'therapist') {
       const therapist = await TherapistService.getTherapistByUserId(String(user._id));
 
       if (therapist) {
         stripeSubscriptionStatus = therapist.stripeSubscriptionStatus;
+        specificId = (therapist as any)._id.toString();
         
         if (stripeSubscriptionStatus !== 'active') {
           const checkout = await generateCheckout(String(user._id), user.email);
@@ -99,7 +104,11 @@ export class AuthBusiness {
             paymentLink: checkout?.url
           };
         }
-        
+      }
+    } else if (user.role === 'patient') {
+      const patient = await PatientService.getPatientByUserId(String(user._id));
+      if (patient) {
+        specificId = (patient as any)._id.toString();
       }
     }
   
@@ -110,7 +119,8 @@ export class AuthBusiness {
         name_user: user.name_user,
         email: user.email,
         role: user.role,
-        stripeSubscriptionStatus
+        stripeSubscriptionStatus,
+        specificId
       }
     };
   }

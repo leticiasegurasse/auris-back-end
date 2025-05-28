@@ -22,4 +22,13 @@ export class TherapistController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async getAll(req: Request, res: Response) {
+    try {
+      const therapists = await TherapistBusiness.getAll();
+      res.json(therapists);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

@@ -27,6 +27,10 @@ export class PatientService {
     return Patient.findById(id).populate('userId');
   }
 
+  static async getPatientByUserId(userId: string): Promise<IPatient | null> {
+    return Patient.findOne({ userId: new mongoose.Types.ObjectId(userId) }).populate('userId');
+  }
+
   static async updatePatient(id: string, updates: Partial<IPatient>): Promise<IPatient | null> {
     return Patient.findByIdAndUpdate(id, updates, { new: true });
   }
