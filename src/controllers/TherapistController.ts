@@ -31,4 +31,17 @@ export class TherapistController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async cancelSubscription(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const therapist = await TherapistBusiness.cancelSubscription(id);
+      res.json({ 
+        message: 'Assinatura cancelada com sucesso',
+        therapist 
+      });
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

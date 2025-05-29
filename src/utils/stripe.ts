@@ -77,3 +77,13 @@ export const getCustomerInvoices = async (customerId: string) => {
         throw error;
     }
 };
+
+export const cancelSubscription = async (subscriptionId: string) => {
+    try {
+        const subscription = await stripe.subscriptions.cancel(subscriptionId);
+        return subscription;
+    } catch (error) {
+        console.error('Erro ao cancelar assinatura:', error);
+        throw error;
+    }
+};

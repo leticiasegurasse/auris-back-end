@@ -17,4 +17,10 @@ export class TherapistBusiness {
   static async getAll(): Promise<ITherapist[]> {
     return TherapistService.getAllTherapists();
   }
+
+  static async cancelSubscription(id: string): Promise<ITherapist> {
+    const therapist = await TherapistService.cancelSubscription(id);
+    if (!therapist) throw new Error('Failed to cancel subscription');
+    return therapist;
+  }
 }

@@ -1,7 +1,7 @@
 import Therapist, { ITherapist } from '../models/Therapist';
 import mongoose from 'mongoose';
 import User from '../models/User';
-import { createStripeCustomer } from '../utils/stripe';
+import { createStripeCustomer, cancelSubscription } from '../utils/stripe';
 
 export class TherapistService {
   static async createTherapist(userId: string, crfa: string): Promise<ITherapist> {
@@ -49,5 +49,24 @@ export class TherapistService {
 
   static async getAllTherapists(): Promise<ITherapist[]> {
     return Therapist.find().populate('userId');
+  }
+
+  static async cancelSubscription(therapistId: string): Promise<ITherapist | null> {
+    const therapist = await this.getTherapistById(therapistId);
+    if (!therapist) {
+      throw new Error('Terapeuta não encontrado');
+    }
+
+    if (!therapist.stripeSubscriptionId) {
+      throw new Error('Terapeuta não possui assinatura ativa');
+    }
+
+    await cancelSubscription(therapist.stripeSubscriptionId);
+
+    console.log(therapist.stripeSubscriptionId);
+    
+    return this.updateTherapist(therapistId, {
+      stripeSubscriptionStatus: 'canceled'
+    });
   }
 }
