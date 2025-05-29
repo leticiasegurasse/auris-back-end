@@ -20,4 +20,8 @@ export class PatientReportBusiness {
   static async getByPatientId(patientId: string) {
     return PatientReportService.getByPatientId(patientId);
   }
+
+  static async getReportsStats(userId: string) {
+    return PatientReportService.getReportsStats(userId);
+  }
 }

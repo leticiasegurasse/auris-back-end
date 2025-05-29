@@ -58,4 +58,20 @@ export class PatientReportService {
         }
       });
   }
+
+  static async getReportsStats(userId: string) {
+    const [total, anamneseCount, evolucaoCount] = await Promise.all([
+      PatientReport.countDocuments({ userId }),
+      PatientReport.countDocuments({ userId, type: 'anamnese' }),
+      PatientReport.countDocuments({ userId, type: 'evolucao' })
+    ]);
+
+    return {
+      total,
+      byType: {
+        anamnese: anamneseCount,
+        evolucao: evolucaoCount
+      }
+    };
+  }
 }

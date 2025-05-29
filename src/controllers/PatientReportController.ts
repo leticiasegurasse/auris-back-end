@@ -67,4 +67,14 @@ export class PatientReportController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async getReportsStats(req: AuthenticatedRequest, res: Response) {
+    try {
+      const userId = req.user?.id;
+      const stats = await PatientReportBusiness.getReportsStats(userId);
+      res.json(stats);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }
