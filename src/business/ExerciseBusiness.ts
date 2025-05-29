@@ -5,8 +5,8 @@ export class ExerciseBusiness {
     return ExerciseService.create(data);
   }
 
-  static async getAllByCategory(categoryId: string) {
-    return ExerciseService.getAllByCategory(categoryId);
+  static async getAllByCategory(categoryId: string, page: number = 1, limit: number = 5) {
+    return ExerciseService.getAllByCategory(categoryId, page, limit);
   }
 
   static async update(id: string, data: any) {

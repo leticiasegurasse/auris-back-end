@@ -6,8 +6,26 @@ export class ExerciseService {
     return Exercise.create(data);
   }
 
-  static async getAllByCategory(categoryId: string) {
-    return Exercise.find({ categoryId });
+  static async getAllByCategory(categoryId: string, page: number = 1, limit: number = 5) {
+    const skip = (page - 1) * limit;
+    
+    const [exercises, total] = await Promise.all([
+      Exercise.find({ categoryId })
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 }),
+      Exercise.countDocuments({ categoryId })
+    ]);
+
+    return {
+      exercises,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit)
+      }
+    };
   }
 
   static async update(id: string, data: any) {

@@ -51,13 +51,15 @@ export class ExerciseController {
   static async getAllByCategory(req: Request, res: Response) {
     try {
       const { categoryId } = req.params;
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 5;
 
       if (!categoryId) throw new Error('categoryId is required');
 
-      const exercises = await ExerciseBusiness.getAllByCategory(categoryId);
+      const result = await ExerciseBusiness.getAllByCategory(categoryId, page, limit);
       const baseUrl = `${req.protocol}://${req.get('host')}`;
 
-      const exercisesWithAudioUrl = exercises.map((exercise: any) => {
+      const exercisesWithAudioUrl = result.exercises.map((exercise: any) => {
         const obj = exercise.toObject ? exercise.toObject() : exercise;
         return {
           ...obj,
@@ -65,7 +67,10 @@ export class ExerciseController {
         };
       });
 
-      res.json(exercisesWithAudioUrl);
+      res.json({
+        exercises: exercisesWithAudioUrl,
+        pagination: result.pagination
+      });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
