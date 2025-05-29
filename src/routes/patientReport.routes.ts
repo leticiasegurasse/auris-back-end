@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/', authMiddleware, LoggingMiddleware('PatientReport'), PatientReportController.create);
 router.get('/stats', authMiddleware, PatientReportController.getReportsStats);
+router.get('/search', authMiddleware, PatientReportController.getByPatientName);
 router.get('/patient/:patientId', authMiddleware, PatientReportController.getByPatientId);
 router.get('/', authMiddleware, PatientReportController.getAllByUser);
 router.get('/:id', authMiddleware, PatientReportController.getById);

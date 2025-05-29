@@ -77,4 +77,22 @@ export class PatientReportController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async getByPatientName(req: AuthenticatedRequest, res: Response) {
+    try {
+      const userId = req.user?.id;
+      const { name } = req.query;
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 5;
+
+      if (!name || typeof name !== 'string') {
+        throw new Error('Nome do paciente é obrigatório');
+      }
+
+      const result = await PatientReportBusiness.getByPatientName(userId, name, page, limit);
+      res.json(result);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

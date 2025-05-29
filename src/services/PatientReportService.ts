@@ -74,4 +74,46 @@ export class PatientReportService {
       }
     };
   }
+
+  static async getByPatientName(userId: string, patientName: string, page: number = 1, limit: number = 5) {
+    const skip = (page - 1) * limit;
+
+    // Primeiro, vamos buscar todos os relatórios do usuário
+    const reports = await PatientReport.find({ userId })
+      .populate('userId', 'name')
+      .populate({
+        path: 'patientId',
+        populate: {
+          path: 'userId',
+          model: 'User',
+          select: 'name_user'
+        }
+      })
+      .sort({ createdAt: -1 });
+
+    // Agora filtramos os relatórios pelo nome do paciente
+    const filteredReports = reports.filter(report => {
+      const patient = report.patientId as any;
+      if (!patient || !patient.userId) return false;
+      
+      const patientNameLower = patient.userId.name_user.toLowerCase();
+      const searchNameLower = patientName.toLowerCase();
+      
+      return patientNameLower.includes(searchNameLower);
+    });
+
+    // Aplicamos a paginação após o filtro
+    const paginatedReports = filteredReports.slice(skip, skip + limit);
+    const total = filteredReports.length;
+
+    return {
+      reports: paginatedReports,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit)
+      }
+    };
+  }
 }
