@@ -4,9 +4,6 @@ import { JwtService } from '../utils/auth/jwt.service';
 import { TherapistService } from '../services/TherapistService';
 import { PatientService } from '../services/PatientService';
 import { generateCheckout } from '../utils/stripe';
-import { ITherapist } from '../models/Therapist';
-import { IPatient } from '../models/Patient';
-import mongoose from 'mongoose';
 
 interface RegisterInput {
   name_user: string;

@@ -5,8 +5,8 @@ export class PatientReportBusiness {
     return PatientReportService.create(data);
   }
 
-  static async getAllByUser(userId: string) {
-    return PatientReportService.getAllByUser(userId);
+  static async getAllByUser(userId: string, page: number = 1, limit: number = 5) {
+    return PatientReportService.getAllByUser(userId, page, limit);
   }
 
   static async getById(id: string) {

@@ -22,8 +22,11 @@ export class PatientReportController {
   static async getAllByUser(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user?.id;
-      const reports = await PatientReportBusiness.getAllByUser(userId);
-      res.json(reports);
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 5;
+      
+      const result = await PatientReportBusiness.getAllByUser(userId, page, limit);
+      res.json(result);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
