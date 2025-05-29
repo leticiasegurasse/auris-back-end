@@ -5,6 +5,10 @@ export class AuthService {
     return User.findOne({ email });
   }
 
+  static async findById(id: string): Promise<IUser | null> {
+    return User.findById(id);
+  }
+
   static async createUser(data: Partial<IUser>): Promise<IUser> {
     return User.create(data);
   }

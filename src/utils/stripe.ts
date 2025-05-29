@@ -53,3 +53,27 @@ export const generateCheckout = async (userId: string, email: string) => {
         console.error(error);
     }
 }
+
+export const getCustomerInvoices = async (customerId: string) => {
+    try {
+        const invoices = await stripe.invoices.list({
+            customer: customerId,
+            limit: 10, // Limita a 10 faturas mais recentes
+        });
+
+        console.log(customerId);
+
+        return invoices.data.map(invoice => ({
+            id: invoice.id,
+            amount: invoice.amount_paid,
+            status: invoice.status,
+            date: new Date(invoice.created * 1000),
+            pdf: invoice.invoice_pdf,
+            number: invoice.number,
+            currency: invoice.currency,
+        }));
+    } catch (error) {
+        console.error('Erro ao buscar faturas:', error);
+        throw error;
+    }
+};

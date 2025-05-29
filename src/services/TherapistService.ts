@@ -30,7 +30,9 @@ export class TherapistService {
   }
 
   static async getTherapistByUserId(userId: string): Promise<ITherapist | null> {
-    return Therapist.findOne({ userId: new mongoose.Types.ObjectId(userId) }).populate('userId');
+    return Therapist.findOne({ userId: new mongoose.Types.ObjectId(userId) })
+      .populate('userId')
+      .select('+stripeCustomerId +stripeSubscriptionId +stripeSubscriptionStatus');
   }
 
   static async getTherapistByStripeCustomerId(customerId: string): Promise<ITherapist | null> {

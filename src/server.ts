@@ -18,6 +18,7 @@ import logRoutes from './routes/logRoutes';
 import checkoutRoutes from './routes/checkoutRoutes';
 import cors from 'cors';
 import stripeWebhook from './webhook/stripeWebhook';
+import invoiceRoutes from './routes/invoice.routes';
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use('/anamnese', anamneseRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/', logRoutes);
 app.use('/checkout', checkoutRoutes);
+app.use('/invoices', invoiceRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running 🚀');
