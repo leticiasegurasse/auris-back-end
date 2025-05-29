@@ -23,7 +23,7 @@ export class CategoryService {
     const exercises = await Exercise.find({ categoryId: id });
     
     if (exercises.length > 0) {
-      throw new Error('Não é possível excluir a categoria pois existem exercícios vinculados a ela');
+      throw new Error(`Não é possível excluir a categoria pois existem ${exercises.length} exercício(s) vinculado(s) a ela. Por favor, remova ou mova os exercícios para outra categoria antes de excluir.`);
     }
 
     return Category.findByIdAndDelete(id);

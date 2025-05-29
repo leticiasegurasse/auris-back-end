@@ -72,7 +72,11 @@ export class CategoryController {
       await CategoryBusiness.delete(id);
       res.json({ message: 'Categoria excluída com sucesso' });
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(400).json({ 
+        error: true,
+        message: error.message,
+        details: 'Não foi possível excluir a categoria'
+      });
     }
   }
 }
