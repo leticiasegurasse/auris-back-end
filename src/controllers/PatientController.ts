@@ -11,8 +11,11 @@ export class PatientController {
         return;
       }
 
-      const patients = await PatientBusiness.getAllByTherapist(therapistId);
-      res.json(patients);
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 5;
+
+      const result = await PatientBusiness.getAllByTherapist(therapistId, page, limit);
+      res.json(result);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }

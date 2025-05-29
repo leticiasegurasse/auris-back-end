@@ -19,8 +19,27 @@ export class PatientService {
     });
   }
 
-  static async getPatientsByTherapist(therapistId: string): Promise<IPatient[]> {
-    return Patient.find({ therapistId }).populate('userId');
+  static async getPatientsByTherapist(therapistId: string, page: number = 1, limit: number = 5): Promise<{ patients: IPatient[], pagination: { total: number, page: number, limit: number, totalPages: number } }> {
+    const skip = (page - 1) * limit;
+    
+    const [patients, total] = await Promise.all([
+      Patient.find({ therapistId })
+        .populate('userId')
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 }),
+      Patient.countDocuments({ therapistId })
+    ]);
+
+    return {
+      patients,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit)
+      }
+    };
   }
 
   static async getPatientById(id: string): Promise<IPatient | null> {

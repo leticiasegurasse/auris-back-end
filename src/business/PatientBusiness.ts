@@ -2,8 +2,8 @@ import { PatientService } from '../services/PatientService';
 import { IPatient } from '../models/Patient';
 
 export class PatientBusiness {
-  static async getAllByTherapist(therapistId: string): Promise<IPatient[]> {
-    return PatientService.getPatientsByTherapist(therapistId);
+  static async getAllByTherapist(therapistId: string, page: number = 1, limit: number = 5) {
+    return PatientService.getPatientsByTherapist(therapistId, page, limit);
   }
 
   static async getById(id: string): Promise<IPatient> {
