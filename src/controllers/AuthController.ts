@@ -1,8 +1,18 @@
+/**
+ * Controlador que gerencia as operações de autenticação
+ * Responsável por registrar novos usuários, fazer login e verificar tokens
+ */
 import { Request, Response } from 'express';
 import { AuthBusiness } from '../business/AuthBusiness';
 import { JwtService } from '../utils/auth/jwt.service';
 
 export class AuthController {
+  /**
+   * Registra um novo usuário no sistema
+   * @param req - Requisição contendo os dados do usuário (nome, email, senha, papel)
+   * @param res - Resposta HTTP
+   * @returns Usuário registrado ou erro
+   */
   static async register(req: Request, res: Response) {
     try {
       const result = await AuthBusiness.register(req.body);
@@ -12,6 +22,13 @@ export class AuthController {
     }
   }
 
+  /**
+   * Realiza o login de um usuário
+   * @param req - Requisição contendo email e senha
+   * @param res - Resposta HTTP
+   * @returns Token JWT e dados do usuário ou erro
+   * @throws Erro se as credenciais forem inválidas ou se a assinatura não estiver ativa
+   */
   static async login(req: Request, res: Response) {
     const { email, password } = req.body;
   
@@ -34,7 +51,12 @@ export class AuthController {
     }
   }
   
-
+  /**
+   * Verifica se um token JWT é válido
+   * @param req - Requisição contendo o token no header Authorization
+   * @param res - Resposta HTTP
+   * @returns Status de validade do token e dados do usuário ou erro
+   */
   static async verifyToken(req: Request, res: Response) {
     try {
       const authHeader = req.headers.authorization;

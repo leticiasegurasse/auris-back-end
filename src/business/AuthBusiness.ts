@@ -1,3 +1,7 @@
+/**
+ * Classe que implementa as regras de negócio relacionadas à autenticação
+ * Responsável por validar e processar as operações de registro e login
+ */
 import { AuthService } from '../services/AuthService';
 import { HashService } from '../utils/auth/hash.service';
 import { JwtService } from '../utils/auth/jwt.service';
@@ -16,13 +20,18 @@ interface RegisterInput {
   diagnosis?: string;
 }
 
-
 interface LoginInput {
   email: string;
   password: string;
 }
 
 export class AuthBusiness {
+  /**
+   * Registra um novo usuário no sistema
+   * @param data - Dados do usuário (nome, email, senha, papel e dados específicos do papel)
+   * @returns Mensagem de sucesso e ID do usuário
+   * @throws Erro se o usuário já existir ou se faltarem dados obrigatórios
+   */
   static async register(data: RegisterInput) {
     const {
       name_user,
@@ -64,13 +73,19 @@ export class AuthBusiness {
       );
     }
     
-  
     return {
       message: 'User registered successfully',
       userId: user._id
     };
   }
 
+  /**
+   * Realiza o login de um usuário
+   * @param data - Dados de login (email e senha)
+   * @returns Token JWT e dados do usuário
+   * @throws Erro se as credenciais forem inválidas
+   * @throws Erro se a assinatura do terapeuta não estiver ativa
+   */
   static async login(data: LoginInput) {
     const { email, password } = data;
   
@@ -121,5 +136,4 @@ export class AuthBusiness {
       }
     };
   }
-  
 }

@@ -31,10 +31,6 @@ const updateTherapistSubscription = async (subscriptionId: string, status: strin
 
 /**
  * Webhook para receber eventos da Stripe.
- * Este endpoint deve ser configurado na sua conta Stripe como URL de webhook.
- * 
- * IMPORTANTE: Este middleware deve ser registrado ANTES de qualquer
- * middleware de parsing (como express.json()) na sua aplicação principal.
  */
 router.post(
   '/stripe',

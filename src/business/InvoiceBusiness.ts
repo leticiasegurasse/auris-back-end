@@ -1,7 +1,17 @@
+/**
+ * Classe que implementa as regras de negócio relacionadas às faturas
+ * Responsável por validar e processar as operações antes de acessar o Stripe
+ */
 import { getCustomerInvoices } from '../utils/stripe';
 import { TherapistService } from '../services/TherapistService';
 
 export class InvoiceBusiness {
+    /**
+     * Busca todas as faturas de um terapeuta
+     * @param userId - ID do usuário terapeuta
+     * @returns Lista de faturas do terapeuta
+     * @throws Erro se o terapeuta não for encontrado ou não tiver ID do Stripe
+     */
     static async getInvoices(userId: string) {
         try {
             const therapist = await TherapistService.getTherapistByUserId(userId);

@@ -1,8 +1,18 @@
+/**
+ * Controlador que gerencia as operações relacionadas às conversas e mensagens
+ * Responsável por criar conversas, buscar mensagens e interagir com o GPT para respostas automáticas
+ */
 import { Request, Response } from 'express';
 import { ConversationBusiness } from '../business/MessageBusiness';
 import { getGPTResponse } from '../utils/openai/gpt';
 
 export class ConversationController {
+  /**
+   * Cria uma nova conversa para um usuário
+   * @param req - Requisição contendo o ID do usuário
+   * @param res - Resposta HTTP
+   * @returns Conversa criada ou erro
+   */
   static async createConversation(req: Request, res: Response) {
     try {
       const { userId } = req.body;
@@ -13,6 +23,12 @@ export class ConversationController {
     }
   }
 
+  /**
+   * Busca todas as conversas de um usuário
+   * @param req - Requisição contendo o ID do usuário nos parâmetros
+   * @param res - Resposta HTTP
+   * @returns Lista de conversas ou erro
+   */
   static async getConversations(req: Request, res: Response) {
     try {
       const { userId } = req.params;
@@ -23,6 +39,12 @@ export class ConversationController {
     }
   }
 
+  /**
+   * Busca todas as mensagens de uma conversa
+   * @param req - Requisição contendo o ID da conversa nos parâmetros
+   * @param res - Resposta HTTP
+   * @returns Lista de mensagens ou erro
+   */
   static async getMessages(req: Request, res: Response) {
     try {
       const { conversationId } = req.params;
@@ -33,6 +55,12 @@ export class ConversationController {
     }
   }
 
+  /**
+   * Adiciona uma nova mensagem em uma conversa e gera resposta automática do GPT se necessário
+   * @param req - Requisição contendo o ID da conversa nos parâmetros e dados da mensagem no body
+   * @param res - Resposta HTTP
+   * @returns Confirmação de sucesso ou erro
+   */
   static async addMessage(req: Request, res: Response) {
     try {
       const { conversationId } = req.params;

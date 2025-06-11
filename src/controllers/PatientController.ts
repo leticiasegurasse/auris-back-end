@@ -1,8 +1,18 @@
+/**
+ * Controlador que gerencia as operações relacionadas aos pacientes
+ * Responsável por buscar e atualizar informações dos pacientes
+ */
 import { Request, Response } from 'express';
 import { PatientBusiness } from '../business/PatientBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
 export class PatientController {
+  /**
+   * Busca todos os pacientes de um terapeuta com paginação
+   * @param req - Requisição contendo o ID do terapeuta no token e parâmetros de paginação
+   * @param res - Resposta HTTP
+   * @returns Lista paginada de pacientes ou erro
+   */
   static async getAllByTherapist(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
@@ -21,6 +31,12 @@ export class PatientController {
     }
   }
 
+  /**
+   * Busca um paciente pelo seu ID
+   * @param req - Requisição contendo o ID do paciente
+   * @param res - Resposta HTTP
+   * @returns Paciente encontrado ou erro
+   */
   static async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -31,6 +47,12 @@ export class PatientController {
     }
   }
 
+  /**
+   * Atualiza os dados de um paciente
+   * @param req - Requisição contendo o ID do paciente e os dados a serem atualizados
+   * @param res - Resposta HTTP
+   * @returns Paciente atualizado ou erro
+   */
   static async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;

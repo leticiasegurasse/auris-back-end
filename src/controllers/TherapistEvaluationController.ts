@@ -1,7 +1,17 @@
+/**
+ * Controlador que gerencia as avaliações feitas pelos fonoaudiólogos
+ * É aqui que recebemos as requisições e enviamos as respostas
+ */
 import { Request, Response } from 'express';
 import { TherapistEvaluationBusiness } from '../business/TherapistEvaluationBusiness';
 
 export class TherapistEvaluationController {
+  /**
+   * Cria uma nova avaliação
+   * @param req - Requisição com os dados da avaliação (comentário, feedback, pontuação e ID da resposta)
+   * @param res - Resposta que será enviada
+   * @returns A avaliação criada ou uma mensagem de erro
+   */
   static async create(req: Request, res: Response) {
     try {
       const { patientResponseId, therapistComment, therapistFeedback, score } = req.body;
@@ -19,6 +29,12 @@ export class TherapistEvaluationController {
     }
   }
 
+  /**
+   * Busca todas as avaliações
+   * @param req - Requisição
+   * @param res - Resposta que será enviada
+   * @returns Lista com todas as avaliações ou uma mensagem de erro
+   */
   static async getAll(req: Request, res: Response) {
     try {
       const evaluations = await TherapistEvaluationBusiness.getAll();
@@ -28,6 +44,12 @@ export class TherapistEvaluationController {
     }
   }
 
+  /**
+   * Busca uma avaliação pelo seu ID
+   * @param req - Requisição com o ID da avaliação
+   * @param res - Resposta que será enviada
+   * @returns A avaliação encontrada ou uma mensagem de erro
+   */
   static async getById(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -38,6 +60,12 @@ export class TherapistEvaluationController {
     }
   }
 
+  /**
+   * Atualiza uma avaliação existente
+   * @param req - Requisição com o ID da avaliação e os novos dados
+   * @param res - Resposta que será enviada
+   * @returns A avaliação atualizada ou uma mensagem de erro
+   */
   static async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -55,6 +83,12 @@ export class TherapistEvaluationController {
     }
   }
 
+  /**
+   * Busca uma avaliação pelo ID da resposta do paciente
+   * @param req - Requisição com o ID da resposta do paciente
+   * @param res - Resposta que será enviada
+   * @returns A avaliação encontrada ou uma mensagem de erro
+   */
   static async getByPatientResponseId(req: Request, res: Response) {
     try {
       const { patientResponseId } = req.params;

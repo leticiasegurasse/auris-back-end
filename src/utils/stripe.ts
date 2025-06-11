@@ -54,6 +54,12 @@ export const generateCheckout = async (userId: string, email: string) => {
     }
 }
 
+/**
+ * Busca as faturas de um cliente no Stripe
+ * @param customerId - ID do cliente no Stripe
+ * @returns Lista formatada das faturas do cliente
+ * @throws Erro se houver falha na comunicação com o Stripe
+ */
 export const getCustomerInvoices = async (customerId: string) => {
     try {
         const invoices = await stripe.invoices.list({

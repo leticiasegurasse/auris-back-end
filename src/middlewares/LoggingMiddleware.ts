@@ -1,3 +1,7 @@
+/**
+ * Middleware que registra automaticamente as ações realizadas no sistema
+ * Intercepta as requisições e respostas para criar logs de auditoria
+ */
 import { Request, Response, NextFunction } from 'express';
 import { LoggerService } from '../services/LoggerService';
 
@@ -5,6 +9,11 @@ interface AuthenticatedRequest extends Request {
   user?: any;
 }
 
+/**
+ * Middleware factory que cria um middleware de logging para uma entidade específica
+ * @param entity - Nome da entidade que será monitorada
+ * @returns Middleware configurado para a entidade
+ */
 export const LoggingMiddleware = (entity: string) => {
   return async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     console.log('LoggingMiddleware - Iniciando');
@@ -13,6 +22,7 @@ export const LoggingMiddleware = (entity: string) => {
     const originalSend = res.send;
     let responseBody: any;
 
+    // Intercepta a resposta para capturar o corpo
     res.send = function (body) {
       try {
         responseBody = typeof body === 'string' ? JSON.parse(body) : body;
@@ -25,6 +35,7 @@ export const LoggingMiddleware = (entity: string) => {
       return originalSend.call(this, body);
     };
 
+    // Registra a ação quando a resposta é finalizada
     res.on('finish', async () => {
       try {
         console.log('LoggingMiddleware - Response finished');
@@ -37,6 +48,7 @@ export const LoggingMiddleware = (entity: string) => {
           return;
         }
 
+        // Determina o tipo de ação baseado no método HTTP
         const action = req.method === 'POST' ? 'CREATE' :
                       req.method === 'PUT' || req.method === 'PATCH' ? 'UPDATE' :
                       req.method === 'DELETE' ? 'DELETE' : null;
@@ -47,6 +59,7 @@ export const LoggingMiddleware = (entity: string) => {
         if (action && responseBody) {
           let entityId;
           
+          // Obtém o ID da entidade baseado no tipo de ação
           if (action === 'CREATE') {
             console.log('Tentando obter _id do responseBody');
             console.log('Keys do responseBody:', Object.keys(responseBody));
@@ -64,6 +77,7 @@ export const LoggingMiddleware = (entity: string) => {
             return;
           }
 
+          // Prepara as alterações para o log
           const changes = req.method === 'DELETE' ? { deleted: true } : req.body;
 
           console.log('Dados do log:', {
@@ -74,6 +88,7 @@ export const LoggingMiddleware = (entity: string) => {
             userId
           });
 
+          // Registra a ação no sistema
           await LoggerService.logAction(action, entity, entityId, changes, userId);
           console.log('Log salvo com sucesso');
         } else {

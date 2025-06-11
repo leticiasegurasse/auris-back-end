@@ -1,8 +1,18 @@
+/**
+ * Controlador que gerencia as operações relacionadas aos relatórios dos pacientes
+ * Responsável por criar, buscar e atualizar relatórios de anamnese e evolução
+ */
 import { Request, Response } from 'express';
 import { PatientReportBusiness } from '../business/PatientReportBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
 export class PatientReportController {
+  /**
+   * Cria um novo relatório do paciente
+   * @param req - Requisição contendo os dados do relatório (report, observation, patientId, type)
+   * @param res - Resposta HTTP
+   * @returns Relatório criado ou erro
+   */
   static async create(req: AuthenticatedRequest, res: Response) {
     try {
       const { report, observation, patientId, type } = req.body;
@@ -19,6 +29,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Busca todos os relatórios de um usuário (terapeuta)
+   * @param req - Requisição contendo o ID do usuário e parâmetros de paginação
+   * @param res - Resposta HTTP
+   * @returns Lista paginada de relatórios
+   */
   static async getAllByUser(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user?.id;
@@ -32,6 +48,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Busca um relatório pelo seu ID
+   * @param req - Requisição contendo o ID do relatório
+   * @param res - Resposta HTTP
+   * @returns Relatório encontrado ou erro
+   */
   static async getById(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -42,6 +64,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Atualiza um relatório existente
+   * @param req - Requisição contendo o ID do relatório e novos dados
+   * @param res - Resposta HTTP
+   * @returns Relatório atualizado ou erro
+   */
   static async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -58,6 +86,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Busca todos os relatórios de um paciente específico
+   * @param req - Requisição contendo o ID do paciente
+   * @param res - Resposta HTTP
+   * @returns Lista de relatórios do paciente
+   */
   static async getByPatientId(req: Request, res: Response) {
     try {
       const { patientId } = req.params;
@@ -68,6 +102,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Busca estatísticas dos relatórios de um usuário
+   * @param req - Requisição contendo o ID do usuário
+   * @param res - Resposta HTTP
+   * @returns Estatísticas dos relatórios (total, por tipo)
+   */
   static async getReportsStats(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user?.id;
@@ -78,6 +118,12 @@ export class PatientReportController {
     }
   }
 
+  /**
+   * Busca relatórios pelo nome do paciente
+   * @param req - Requisição contendo o nome do paciente e parâmetros de paginação
+   * @param res - Resposta HTTP
+   * @returns Lista paginada de relatórios filtrados por nome
+   */
   static async getByPatientName(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user?.id;

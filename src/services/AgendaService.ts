@@ -1,3 +1,7 @@
+/**
+ * Serviço que faz as operações diretas no banco de dados relacionadas à agenda de consultas
+ * Responsável por criar, buscar, atualizar e excluir agendamentos no MongoDB
+ */
 import Agenda, { IAgenda } from '../models/Agenda';
 import mongoose from 'mongoose';
 
@@ -10,7 +14,11 @@ interface CreateAgendaDTO {
 }
 
 export class AgendaService {
-  // Cria uma nova agenda a partir dos dados informados
+  /**
+   * Cria um novo agendamento no banco de dados
+   * @param data - Dados do agendamento (paciente, terapeuta, data/hora, especialidade e observações)
+   * @returns Agendamento criado
+   */
   static async createAgenda(data: CreateAgendaDTO): Promise<IAgenda> {
     const patientId = new mongoose.Types.ObjectId(data.patient);
     const therapistId = new mongoose.Types.ObjectId(data.therapist);
@@ -25,14 +33,21 @@ export class AgendaService {
     });
   }
 
-  // Busca todas as agendas cadastradas
+  /**
+   * Busca todos os agendamentos cadastrados
+   * @returns Lista de todos os agendamentos com dados do paciente e terapeuta populados
+   */
   static async getAllAgendas(): Promise<IAgenda[]> {
     return Agenda.find()
       .populate('patient')
       .populate('therapist');
   }
 
-  // Busca agendas por fonoaudiólogo
+  /**
+   * Busca todos os agendamentos de um fonoaudiólogo
+   * @param therapistId - ID do fonoaudiólogo
+   * @returns Lista de agendamentos com dados do paciente e terapeuta populados
+   */
   static async getAgendasByTherapist(therapistId: string): Promise<IAgenda[]> {
     return Agenda.find({ therapist: therapistId })
       .populate({
@@ -45,32 +60,53 @@ export class AgendaService {
       .populate('therapist');
   }
 
-  // Busca agendas por paciente
+  /**
+   * Busca todos os agendamentos de um paciente
+   * @param patientId - ID do paciente
+   * @returns Lista de agendamentos com dados do paciente e terapeuta populados
+   */
   static async getAgendasByPatient(patientId: string): Promise<IAgenda[]> {
     return Agenda.find({ patient: patientId })
       .populate('patient')
       .populate('therapist');
   }
 
-  // Busca uma agenda pelo seu ID
+  /**
+   * Busca um agendamento pelo seu ID
+   * @param id - ID do agendamento
+   * @returns Agendamento encontrado com dados do paciente e terapeuta populados
+   */
   static async getAgendaById(id: string): Promise<IAgenda | null> {
     return Agenda.findById(id)
       .populate('patient')
       .populate('therapist');
   }
 
-  // Atualiza a agenda com os dados informados
+  /**
+   * Atualiza um agendamento existente
+   * @param id - ID do agendamento
+   * @param updates - Novos dados do agendamento
+   * @returns Agendamento atualizado
+   */
   static async updateAgenda(id: string, updates: Partial<IAgenda>): Promise<IAgenda | null> {
     updates.updated_at = new Date();
     return Agenda.findByIdAndUpdate(id, updates, { new: true });
   }
 
-  // Exclui uma agenda pelo seu ID
+  /**
+   * Exclui um agendamento
+   * @param id - ID do agendamento
+   * @returns Agendamento excluído
+   */
   static async deleteAgenda(id: string): Promise<IAgenda | null> {
     return Agenda.findByIdAndDelete(id);
   }
 
-  // Busca consultas futuras a partir do horário atual
+  /**
+   * Busca todas as consultas futuras de um fonoaudiólogo
+   * @param therapistId - ID do fonoaudiólogo
+   * @returns Lista de consultas futuras ordenadas por data/hora
+   */
   static async getFutureConsultations(therapistId: string): Promise<IAgenda[]> {
     const now = new Date();
     return Agenda.find({ 

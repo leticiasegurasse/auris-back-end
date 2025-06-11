@@ -1,6 +1,16 @@
+/**
+ * Controlador que gerencia as operações relacionadas ao checkout de pagamentos
+ * Responsável por criar sessões de checkout para assinaturas
+ */
 import { Request, Response } from 'express';
 import { generateCheckout } from '../utils/stripe';
 
+/**
+ * Cria uma nova sessão de checkout para um usuário
+ * @param req - Requisição contendo o ID do usuário nos parâmetros e email no body
+ * @param res - Resposta HTTP
+ * @returns URL da sessão de checkout ou erro
+ */
 export const createCheckoutSession = async (req: Request, res: Response): Promise<void> => {
     try {
         const { userId } = req.params;

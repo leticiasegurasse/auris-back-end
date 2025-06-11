@@ -1,8 +1,18 @@
+/**
+ * Controlador que gerencia as operações relacionadas às categorias de exercícios
+ * Responsável por criar, buscar, atualizar e excluir categorias
+ */
 import { Request, Response } from 'express';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 import { CategoryBusiness } from '../business/CategoryBusiness';
 
 export class CategoryController {
+  /**
+   * Cria uma nova categoria de exercícios
+   * @param req - Requisição contendo os dados da categoria e ID do terapeuta no token
+   * @param res - Resposta HTTP
+   * @returns Categoria criada ou erro
+   */
   static async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
@@ -25,6 +35,12 @@ export class CategoryController {
     }
   }
 
+  /**
+   * Busca todas as categorias de um terapeuta
+   * @param req - Requisição contendo o ID do terapeuta no token
+   * @param res - Resposta HTTP
+   * @returns Lista de categorias ou erro
+   */
   static async getAllByTherapist(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const therapistId = req.user?.id;
@@ -40,6 +56,12 @@ export class CategoryController {
     }
   }
 
+  /**
+   * Busca uma categoria pelo seu ID
+   * @param req - Requisição contendo o ID da categoria
+   * @param res - Resposta HTTP
+   * @returns Categoria encontrada ou erro
+   */
   static async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -50,6 +72,12 @@ export class CategoryController {
     }
   }
 
+  /**
+   * Atualiza uma categoria existente
+   * @param req - Requisição contendo o ID da categoria e novos dados
+   * @param res - Resposta HTTP
+   * @returns Categoria atualizada ou erro
+   */
   static async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -66,6 +94,12 @@ export class CategoryController {
     }
   }
 
+  /**
+   * Exclui uma categoria
+   * @param req - Requisição contendo o ID da categoria
+   * @param res - Resposta HTTP
+   * @returns Mensagem de sucesso ou erro
+   */
   static async delete(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;

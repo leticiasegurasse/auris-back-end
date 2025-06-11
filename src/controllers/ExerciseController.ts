@@ -1,3 +1,7 @@
+/**
+ * Controlador que gerencia as operações relacionadas aos exercícios fonoaudiológicos
+ * Responsável por criar, buscar, atualizar e excluir exercícios, incluindo o gerenciamento de arquivos de áudio
+ */
 import { Request, Response } from 'express';
 import { getBucket } from '../utils/gridfs';
 import { ExerciseBusiness } from '../business/ExerciseBusiness';
@@ -5,6 +9,12 @@ import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 import mongoose from 'mongoose';
 
 export class ExerciseController {
+  /**
+   * Cria um novo exercício com arquivo de áudio
+   * @param req - Requisição contendo os dados do exercício e arquivo de áudio
+   * @param res - Resposta HTTP
+   * @returns Exercício criado ou erro
+   */
   static async create(req: AuthenticatedRequest, res: Response) {
     try {
       const { title, description, instructions, categoryId } = req.body;
@@ -31,7 +41,7 @@ export class ExerciseController {
           title,
           description,
           instructions,
-          categoryId: convertedCategoryId, // 👈 aqui mandando como ObjectId
+          categoryId: convertedCategoryId,
           audioReference: fileId.toString(),
         });
 
@@ -48,6 +58,12 @@ export class ExerciseController {
     }
   }
 
+  /**
+   * Busca exercícios por categoria com paginação
+   * @param req - Requisição contendo o ID da categoria e parâmetros de paginação
+   * @param res - Resposta HTTP
+   * @returns Lista paginada de exercícios com URLs dos áudios
+   */
   static async getAllByCategory(req: Request, res: Response) {
     try {
       const { categoryId } = req.params;
@@ -76,6 +92,12 @@ export class ExerciseController {
     }
   }
 
+  /**
+   * Atualiza um exercício existente
+   * @param req - Requisição contendo o ID do exercício, novos dados e opcionalmente um novo arquivo de áudio
+   * @param res - Resposta HTTP
+   * @returns Exercício atualizado ou erro
+   */
   static async update(req: AuthenticatedRequest, res: Response) {
     try {
       const { title, description, instructions, categoryId } = req.body;
@@ -117,6 +139,12 @@ export class ExerciseController {
     }
   }
   
+  /**
+   * Busca um exercício pelo seu ID
+   * @param req - Requisição contendo o ID do exercício
+   * @param res - Resposta HTTP
+   * @returns Exercício encontrado ou erro
+   */
   static async getById(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -134,6 +162,12 @@ export class ExerciseController {
     }
   }
   
+  /**
+   * Exclui um exercício
+   * @param req - Requisição contendo o ID do exercício
+   * @param res - Resposta HTTP
+   * @returns Mensagem de sucesso ou erro
+   */
   static async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;

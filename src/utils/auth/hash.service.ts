@@ -1,6 +1,9 @@
+// Importação do bcryptjs para criptografia de senhas
 import bcrypt from 'bcryptjs';
 
+// Classe responsável por gerenciar operações de hash de senhas
 export class HashService {
+    // Número de rounds para geração do salt (maior = mais seguro, mas mais lento)
     private static readonly SALT_ROUNDS = 10;
 
     /**

@@ -1,10 +1,25 @@
+/**
+ * Middleware de autenticação
+ * Responsável por verificar e validar tokens JWT nas requisições
+ * Adiciona os dados do usuário decodificados à requisição
+ */
 import { Request, Response, NextFunction } from 'express';
 import { JwtService } from '../utils/auth/jwt.service';
 
+/**
+ * Interface que estende a Request do Express para incluir os dados do usuário autenticado
+ */
 export interface AuthenticatedRequest extends Request {
   user?: any;
 }
 
+/**
+ * Middleware que verifica a autenticação do usuário
+ * @param req - Requisição HTTP com possíveis dados do usuário
+ * @param res - Resposta HTTP
+ * @param next - Função para continuar o fluxo da requisição
+ * @returns Erro 401 se não houver token ou se o token for inválido
+ */
 export const authMiddleware = async (
   req: AuthenticatedRequest,
   res: Response,

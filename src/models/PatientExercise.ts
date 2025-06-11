@@ -1,39 +1,33 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-interface ITherapistReview {
-  therapistComment: string;
-  therapistFeedback: string;
-  score: number;
-  createdAt: Date;
-}
 
+/**
+ * Interface que define a estrutura do exercício do paciente
+ */
 export interface IPatientExercise extends Document {
+  /** Referência ao paciente */
   patientId: mongoose.Types.ObjectId;
+  /** Referência ao exercício */
   exerciseId: mongoose.Types.ObjectId;
+  /** Data de criação do registro */
+  createdAt: Date;
   status: string;
-  patientComment: string;
-  responseDate: Date;
   startDate: Date;
   endDate: Date;
-  therapistReview?: ITherapistReview;
 }
 
-const TherapistReviewSchema: Schema = new Schema({
-  therapistComment: { type: String },
-  therapistFeedback: { type: String },
-  score: { type: Number },
-  createdAt: { type: Date, default: Date.now }
-}, { _id: false });
 
+/**
+ * Schema do MongoDB para o exercício do paciente
+ * Define a estrutura e validações dos dados
+ */
 const PatientExerciseSchema: Schema = new Schema({
   patientId: { type: Schema.Types.ObjectId, ref: 'Patient', required: true },
   exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
+  createdAt: { type: Date, default: Date.now },
   status: { type: String },
-  patientComment: { type: String },
-  responseDate: { type: Date },
   startDate: { type: Date },
   endDate: { type: Date },
-  therapistReview: TherapistReviewSchema
 });
 
 export default mongoose.model<IPatientExercise>('PatientExercise', PatientExerciseSchema);

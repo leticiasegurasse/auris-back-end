@@ -1,9 +1,19 @@
+/**
+ * Controlador que gerencia as operações relacionadas aos exercícios dos pacientes
+ * Responsável por criar, buscar, atualizar e avaliar exercícios atribuídos aos pacientes
+ */
 import { Request, Response } from 'express';
 import { getBucket } from '../utils/gridfs';
 import { PatientExerciseBusiness } from '../business/PatientExerciseBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
 export class PatientExerciseController {
+    /**
+     * Cria um novo exercício para um paciente
+     * @param req - Requisição contendo os dados do exercício (patientId, exerciseId, status, etc)
+     * @param res - Resposta HTTP
+     * @returns Exercício criado ou erro
+     */
     static async create(req: AuthenticatedRequest, res: Response) {
         try {
           const {
@@ -34,6 +44,12 @@ export class PatientExerciseController {
     }
       
 
+  /**
+   * Busca todos os exercícios de um paciente logado
+   * @param req - Requisição contendo o ID do paciente no token
+   * @param res - Resposta HTTP
+   * @returns Lista de exercícios com URLs dos áudios
+   */
   static async getAllByPatient(req: AuthenticatedRequest, res: Response) {
     try {
       const patientId = req.user?.id;
@@ -51,6 +67,12 @@ export class PatientExerciseController {
     }
   }
 
+  /**
+   * Atualiza um exercício existente
+   * @param req - Requisição contendo o ID do exercício e novos dados
+   * @param res - Resposta HTTP
+   * @returns Exercício atualizado ou erro
+   */
   static async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -78,34 +100,13 @@ export class PatientExerciseController {
     }
   }
   
-
-  static async updateReview(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { therapistComment, therapistFeedback, score } = req.body;
   
-      const updated = await PatientExerciseBusiness.updateReview(id, {
-        therapistComment,
-        therapistFeedback,
-        score
-      });
-  
-      res.json(updated);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  }
-  
-  static async getReview(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const review = await PatientExerciseBusiness.getReview(id);
-      res.json(review);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  }
-  
+  /**
+   * Busca todos os exercícios de um paciente específico
+   * @param req - Requisição contendo o ID do paciente
+   * @param res - Resposta HTTP
+   * @returns Lista de exercícios com URLs dos áudios
+   */
   static async getAllByPatientId(req: AuthenticatedRequest, res: Response) {
     try {
       const { patientId } = req.params;
@@ -124,6 +125,12 @@ export class PatientExerciseController {
     }
   }
 
+  /**
+   * Exclui um exercício pendente
+   * @param req - Requisição contendo o ID do exercício
+   * @param res - Resposta HTTP
+   * @returns Mensagem de sucesso ou erro
+   */
   static async deleteIfPending(req: Request, res: Response) {
     try {
       const { id } = req.params;
