@@ -2,17 +2,18 @@
  * Rotas de Fonoaudiólogo
  * Este arquivo contém as rotas para gerenciamento dos fonoaudiólogos.
  */
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import { TherapistController } from '../controllers/TherapistController';
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = express.Router();
 
 // Busca um fonoaudiólogo específico pelo ID
-router.get('/:id', authMiddleware, TherapistController.getById);
+router.get('/:id', authMiddleware, cacheMiddleware(300) as RequestHandler, TherapistController.getById);
 
 // Lista todos os fonoaudiólogos
-router.get('/', authMiddleware, TherapistController.getAll);
+router.get('/', authMiddleware, cacheMiddleware(300) as RequestHandler, TherapistController.getAll);
 
 // Atualiza os dados de um fonoaudiólogo
 router.put('/:id', authMiddleware, TherapistController.update);

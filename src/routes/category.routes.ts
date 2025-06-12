@@ -3,10 +3,11 @@
  * Este arquivo contém as rotas para gerenciamento das categorias de exercícios.
  * Todas as rotas requerem autenticação.
  */
-import { Router } from 'express';
+import { Router, RequestHandler } from 'express';
 import { CategoryController } from '../controllers/CategoryController';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = Router();
 
@@ -14,7 +15,7 @@ const router = Router();
 router.post('/', authMiddleware, LoggingMiddleware('Category'), CategoryController.create);
 
 // Lista todas as categorias do terapeuta logado
-router.get('/', authMiddleware, CategoryController.getAllByTherapist);
+router.get('/', authMiddleware, cacheMiddleware(300) as RequestHandler, CategoryController.getAllByTherapist);
 
 // Busca uma categoria específica pelo ID
 router.get('/:id', authMiddleware, CategoryController.getById);

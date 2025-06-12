@@ -3,10 +3,11 @@
  * Este arquivo contém as rotas para gerenciamento dos relatórios dos pacientes.
  * Todas as rotas requerem autenticação.
  */
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import { PatientReportController } from '../controllers/PatientReportController';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = express.Router();
 
@@ -14,19 +15,19 @@ const router = express.Router();
 router.post('/', authMiddleware, LoggingMiddleware('PatientReport'), PatientReportController.create);
 
 // Obtém quantidade de relatórios total e por tipo
-router.get('/stats', authMiddleware, PatientReportController.getReportsStats);
+router.get('/stats', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientReportController.getReportsStats);
 
 // Busca relatórios pelo nome do paciente
 router.get('/search', authMiddleware, PatientReportController.getByPatientName);
 
 // Busca relatórios de um paciente específico pelo ID
-router.get('/patient/:patientId', authMiddleware, PatientReportController.getByPatientId);
+router.get('/patient/:patientId', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientReportController.getByPatientId);
 
 // Lista todos os relatórios do usuário logado
-router.get('/', authMiddleware, PatientReportController.getAllByUser);
+router.get('/', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientReportController.getAllByUser);
 
 // Busca um relatório específico pelo ID
-router.get('/:id', authMiddleware, PatientReportController.getById);
+router.get('/:id', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientReportController.getById);
 
 // Atualiza um relatório existente
 router.put('/:id', authMiddleware, LoggingMiddleware('PatientReport'), PatientReportController.update);

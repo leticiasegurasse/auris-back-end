@@ -3,11 +3,12 @@
  * Este arquivo contém as rotas para gerenciamento dos exercícios atribuídos aos pacientes.
  * Todas as rotas requerem autenticação.
  */
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import multer from 'multer';
 import { PatientExerciseController } from '../controllers/PatientExerciseController';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = express.Router();
 
@@ -16,13 +17,13 @@ const router = express.Router();
 router.post('/', authMiddleware, LoggingMiddleware('PatientExercise'), PatientExerciseController.create);
 
 // Lista todos os exercícios do paciente logado
-router.get('/', authMiddleware, PatientExerciseController.getAllByPatient);
+router.get('/', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientExerciseController.getAllByPatient);
 
 // Atualiza um exercício existente
 router.put('/:id', authMiddleware, LoggingMiddleware('PatientExercise'), PatientExerciseController.update);
 
 // Lista todos os exercícios de um paciente específico
-router.get('/patient/:patientId', authMiddleware, PatientExerciseController.getAllByPatientId);
+router.get('/patient/:patientId', authMiddleware, cacheMiddleware(300) as RequestHandler, PatientExerciseController.getAllByPatientId);
 
 // Remove um exercício pendente
 router.delete('/:id', authMiddleware, LoggingMiddleware('PatientExercise'), PatientExerciseController.deleteIfPending);

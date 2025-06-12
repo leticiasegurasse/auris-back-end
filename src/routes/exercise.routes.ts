@@ -4,13 +4,14 @@
  * incluindo criação, atualização, listagem e exclusão de exercícios,
  * além de funcionalidades específicas como busca por categoria e atribuição a pacientes
  */
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import multer from 'multer';
 import { ExerciseController } from '../controllers/ExerciseController';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { LoggingMiddleware } from '../middlewares/LoggingMiddleware';
 import { getBucket } from '../utils/gridfs';
 import { ObjectId } from 'mongodb';
+import { cacheMiddleware } from '../middlewares/cache.middleware';
 
 const router = express.Router();
 
@@ -20,8 +21,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 // Cria um novo exercício com arquivo de áudio
 router.post('/', authMiddleware, upload.single('file'), LoggingMiddleware('Exercise'), ExerciseController.create);
 
-// Lista exercícios por categoria
-router.get('/category/:categoryId', authMiddleware, ExerciseController.getAllByCategory);
+// Lista exercícios por categoria (com cache de 5 minutos)
+router.get('/category/:categoryId', authMiddleware, cacheMiddleware(300) as RequestHandler, ExerciseController.getAllByCategory);
 
 // Obtém o arquivo de áudio de um exercício
 router.get('/audio/:id', async (req, res) => {
@@ -44,8 +45,8 @@ router.get('/audio/:id', async (req, res) => {
     }
 });
 
-// Busca um exercício específico pelo ID
-router.get('/:id', authMiddleware, ExerciseController.getById);
+// Busca um exercício específico pelo ID (com cache de 5 minutos)
+router.get('/:id', authMiddleware, cacheMiddleware(300) as RequestHandler, ExerciseController.getById);
 
 // Atualiza um exercício existente com novo áudio
 router.put('/:id', authMiddleware, upload.single('file'), LoggingMiddleware('Exercise'), ExerciseController.update);
