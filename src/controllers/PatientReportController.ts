@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { PatientReportBusiness } from '../business/PatientReportBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+import { CacheService } from '../services/cache.service';
 
 export class PatientReportController {
   /**
@@ -23,6 +24,10 @@ export class PatientReportController {
       }
 
       const created = await PatientReportBusiness.create({ report, observation, userId, patientId, type });
+      
+      // Limpa o cache após criar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.status(201).json(created);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

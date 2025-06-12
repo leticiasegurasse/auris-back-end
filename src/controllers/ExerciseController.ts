@@ -7,6 +7,7 @@ import { getBucket } from '../utils/gridfs';
 import { ExerciseBusiness } from '../business/ExerciseBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 import mongoose from 'mongoose';
+import { CacheService } from '../services/cache.service';
 
 export class ExerciseController {
   /**
@@ -44,6 +45,9 @@ export class ExerciseController {
           categoryId: convertedCategoryId,
           audioReference: fileId.toString(),
         });
+
+        // Limpa o cache após criar com sucesso
+        await CacheService.getInstance().clear();
 
         res.status(201).json(exercise);
       });
@@ -133,6 +137,9 @@ export class ExerciseController {
         ...(audioReference && { audioReference }),
       });
 
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+
       res.json(updatedExercise);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -172,6 +179,10 @@ export class ExerciseController {
     try {
       const { id } = req.params;
       await ExerciseBusiness.delete(id);
+      
+      // Limpa o cache após deletar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.json({ message: 'Exercício excluído com sucesso' });
     } catch (error: any) {
       res.status(400).json({ message: error.message });

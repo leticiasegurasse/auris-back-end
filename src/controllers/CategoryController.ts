@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 import { CategoryBusiness } from '../business/CategoryBusiness';
+import { CacheService } from '../services/cache.service';
 
 export class CategoryController {
   /**
@@ -28,6 +29,9 @@ export class CategoryController {
         description,
         therapistId,
       });
+
+      // Limpa o cache após criar com sucesso
+      await CacheService.getInstance().clear();
 
       res.status(201).json(category);
     } catch (error: any) {
@@ -88,6 +92,9 @@ export class CategoryController {
         description,
       });
 
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+
       res.json(updated);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -104,6 +111,10 @@ export class CategoryController {
     try {
       const { id } = req.params;
       await CategoryBusiness.delete(id);
+      
+      // Limpa o cache após deletar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.json({ message: 'Categoria excluída com sucesso' });
     } catch (error: any) {
       res.status(400).json({ 

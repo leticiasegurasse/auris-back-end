@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { AgendaBusiness } from '../business/AgendaBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+import { CacheService } from '../services/cache.service';
 
 export class AgendaController {
   /**
@@ -17,6 +18,10 @@ export class AgendaController {
     try {
       const { patient, therapist, consultationDateTime, specialty, observations } = req.body;
       const agenda = await AgendaBusiness.create({ patient, therapist, consultationDateTime, specialty, observations });
+      
+      // Limpa o cache após criar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.status(201).json(agenda);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

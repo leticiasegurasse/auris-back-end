@@ -6,6 +6,7 @@ import { Request, Response } from 'express';
 import { getBucket } from '../utils/gridfs';
 import { PatientExerciseBusiness } from '../business/PatientExerciseBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+import { CacheService } from '../services/cache.service';
 
 export class PatientExerciseController {
     /**
@@ -37,6 +38,10 @@ export class PatientExerciseController {
           };
       
           const created = await PatientExerciseBusiness.create(data);
+          
+          // Limpa o cache após criar com sucesso
+          await CacheService.getInstance().clear();
+          
           res.status(201).json(created);
         } catch (error: any) {
           res.status(400).json({ message: error.message });
@@ -94,6 +99,9 @@ export class PatientExerciseController {
         therapistReview
       });
   
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+  
       res.json(updated);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -135,6 +143,10 @@ export class PatientExerciseController {
     try {
       const { id } = req.params;
       const result = await PatientExerciseBusiness.deleteIfPending(id);
+      
+      // Limpa o cache após deletar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.json(result);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { PatientBusiness } from '../business/PatientBusiness';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+import { CacheService } from '../services/cache.service';
 
 export class PatientController {
   /**
@@ -57,8 +58,12 @@ export class PatientController {
     try {
       const { id } = req.params;
       const updates = req.body;
-      const updated = await PatientBusiness.update(id, updates);
-      res.json(updated);
+      const updatedPatient = await PatientBusiness.update(id, updates);
+      
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+      
+      res.json(updatedPatient);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }

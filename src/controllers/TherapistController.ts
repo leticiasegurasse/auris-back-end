@@ -4,6 +4,7 @@
  */
 import { Request, Response } from 'express';
 import { TherapistBusiness } from '../business/TherapistBusiness';
+import { CacheService } from '../services/cache.service';
 
 export class TherapistController {
   /**
@@ -32,8 +33,12 @@ export class TherapistController {
     try {
       const { id } = req.params;
       const updates = req.body;
-      const updatedTherapist = await TherapistBusiness.update(id, updates);
-      res.json(updatedTherapist);
+      const updated = await TherapistBusiness.update(id, updates);
+      
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+      
+      res.json(updated);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
