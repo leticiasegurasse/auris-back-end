@@ -26,4 +26,7 @@ router.put('/:id', authMiddleware, LoggingMiddleware('Category'), CategoryContro
 // Remove uma categoria
 router.delete('/:id', authMiddleware, LoggingMiddleware('Category'), CategoryController.delete);
 
+// Conta exercícios por categoria do terapeuta logado
+router.get('/stats/exercises', authMiddleware, cacheMiddleware(300) as RequestHandler, CategoryController.countExercisesByCategory);
+
 export default router;

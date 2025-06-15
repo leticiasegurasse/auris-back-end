@@ -51,4 +51,13 @@ export class CategoryBusiness {
   static async delete(id: string) {
     return CategoryService.delete(id);
   }
+
+  /**
+   * Conta a quantidade de exercícios em cada categoria de um terapeuta
+   * @param therapistId - ID do terapeuta
+   * @returns Lista de categorias com a contagem de exercícios
+   */
+  static async countExercisesByCategory(therapistId: string) {
+    return CategoryService.countExercisesByCategory(therapistId);
+  }
 }

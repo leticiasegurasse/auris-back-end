@@ -59,4 +59,27 @@ export class CategoryService {
 
     return Category.findByIdAndDelete(id);
   }
+
+  /**
+   * Conta a quantidade de exercícios em cada categoria de um terapeuta
+   * @param therapistId - ID do terapeuta
+   * @returns Lista de categorias com a contagem de exercícios
+   */
+  static async countExercisesByCategory(therapistId: string) {
+    const categories = await Category.find({ therapistId });
+    
+    const categoriesWithCount = await Promise.all(
+      categories.map(async (category) => {
+        const exerciseCount = await Exercise.countDocuments({ categoryId: category._id });
+        return {
+          _id: category._id,
+          title: category.title,
+          description: category.description,
+          exerciseCount
+        };
+      })
+    );
+
+    return categoriesWithCount;
+  }
 }

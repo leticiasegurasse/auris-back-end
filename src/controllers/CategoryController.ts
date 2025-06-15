@@ -124,4 +124,25 @@ export class CategoryController {
       });
     }
   }
+
+  /**
+   * Conta a quantidade de exercícios em cada categoria do terapeuta logado
+   * @param req - Requisição contendo o ID do terapeuta no token
+   * @param res - Resposta HTTP
+   * @returns Lista de categorias com a contagem de exercícios ou erro
+   */
+  static async countExercisesByCategory(req: AuthenticatedRequest, res: Response): Promise<void> {
+    try {
+      const therapistId = req.user?.id;
+      if (!therapistId) {
+        res.status(401).json({ message: 'Therapist ID is missing in token.' });
+        return;
+      }
+
+      const categories = await CategoryBusiness.countExercisesByCategory(therapistId);
+      res.json(categories);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

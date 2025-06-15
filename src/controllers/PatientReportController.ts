@@ -85,6 +85,10 @@ export class PatientReportController {
       }
 
       const updated = await PatientReportBusiness.update(id, { report, observation, type });
+      
+      // Limpa o cache após atualizar com sucesso
+      await CacheService.getInstance().clear();
+      
       res.json(updated);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

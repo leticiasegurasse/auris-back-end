@@ -335,3 +335,205 @@
 {"action":"CREATE","changes":{"endDate":"2025-06-19","exerciseId":"680d550486a1e70c034ee8a3","patientId":"6849bf07c43249335a3c135a","startDate":"2025-06-12","status":"pending"},"entity":"PatientExercise","entityId":"684afd4dc7d9deec8ca4cbe0","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:16:13.246Z","userId":"67fee92a4ec3cbe3b71054db"}
 {"level":"info","message":"Cache MISS para a chave: __express__/patient-exercises/patient/6849bf07c43249335a3c135a","timestamp":"2025-06-12T16:16:13.248Z"}
 {"level":"info","message":"Cache SET para a chave: __express__/patient-exercises/patient/6849bf07c43249335a3c135a com duração de 300 segundos","timestamp":"2025-06-12T16:16:13.317Z"}
+{"host":"prepared-polliwog-27272.upstash.io","level":"info","message":"Iniciando conexão com Redis:","port":6379,"timestamp":"2025-06-12T16:27:09.352Z","tls":true}
+{"level":"info","message":"Conectado ao Redis com sucesso","timestamp":"2025-06-12T16:27:09.437Z"}
+{"level":"info","message":"Conexão com Redis inicializada com sucesso","timestamp":"2025-06-12T16:27:09.480Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:09.500Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:27:09.599Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:09.632Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/categories","timestamp":"2025-06-12T16:27:11.721Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/categories com duração de 300 segundos","timestamp":"2025-06-12T16:27:11.741Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories","timestamp":"2025-06-12T16:27:11.769Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/exercises/category/680d4e0eaaab7f67bbacaf3c?page=1&limit=5","timestamp":"2025-06-12T16:27:12.852Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/exercises/category/680d4e0eaaab7f67bbacaf3c?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:27:12.880Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/exercises/category/680d4e0eaaab7f67bbacaf3c?page=1&limit=5","timestamp":"2025-06-12T16:27:12.911Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:16.534Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:16.554Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:27:18.285Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:27:18.359Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:27:18.392Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:18.395Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:27:18.398Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-12T16:27:18.428Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:27:18.431Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:27:18.460Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:33:32.161Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:33:32.230Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:33:32.261Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:33:32.265Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:33:32.273Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-12T16:33:32.310Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:33:32.330Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:33:32.349Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:33:32.361Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:33:51.099Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:33:51.122Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:33:51.123Z"}
+{"action":"UPDATE","changes":{"observation":"teste att","report":"teste atualização"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:34:24.877Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:34:24.879Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:34:30.880Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:34:30.902Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:34:30.903Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:34:30.907Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:34:30.924Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:34:30.937Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:35:51.116Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:35:51.153Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:35:51.156Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:35:54.672Z"}
+{"action":"UPDATE","changes":{"observation":"teste","report":"teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:35:54.677Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:16.142Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:36:16.175Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:36:16.179Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:18.331Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:18.353Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:36:18.356Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:36:18.357Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:36:18.377Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:36:18.378Z"}
+{"action":"UPDATE","changes":{"observation":"teste","report":"teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:36:22.539Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:22.553Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:53.596Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:36:53.631Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:36:53.631Z"}
+{"action":"UPDATE","changes":{"observation":"teste","report":"teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:36:58.416Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:36:58.419Z"}
+{"action":"UPDATE","changes":{"observation":"attteste","report":"teste teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:37:07.482Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:37:07.497Z"}
+{"action":"UPDATE","changes":{"observation":"attteste","report":"teste teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:41:27.562Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:41:27.574Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:41:27.662Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:41:45.093Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:41:45.136Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:41:45.142Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-12T16:41:45.172Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:41:45.196Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:42:19.085Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:42:19.109Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:42:19.110Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:42:21.946Z"}
+{"action":"UPDATE","changes":{"observation":"attteste","report":"teste teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:42:21.951Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:42:40.368Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:42:40.396Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:42:40.402Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:42:40.415Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:42:40.428Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:42:40.437Z"}
+{"host":"prepared-polliwog-27272.upstash.io","level":"info","message":"Iniciando conexão com Redis:","port":6379,"timestamp":"2025-06-12T16:44:15.518Z","tls":true}
+{"level":"info","message":"Conectado ao Redis com sucesso","timestamp":"2025-06-12T16:44:15.803Z"}
+{"level":"info","message":"Conexão com Redis inicializada com sucesso","timestamp":"2025-06-12T16:44:15.854Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:15.876Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:15.884Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:15.926Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:15.951Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/agenda/future","timestamp":"2025-06-12T16:44:15.953Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/agenda/future com duração de 300 segundos","timestamp":"2025-06-12T16:44:15.979Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-12T16:44:16.049Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/categories","timestamp":"2025-06-12T16:44:18.624Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/categories com duração de 300 segundos","timestamp":"2025-06-12T16:44:18.645Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories","timestamp":"2025-06-12T16:44:18.696Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:44:20.313Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:44:20.355Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:20.363Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:20.371Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:20.407Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:20.411Z"}
+{"action":"UPDATE","changes":{"observation":"teste","report":"teste"},"entity":"PatientReport","entityId":"6849cb2e2a5be1bf1b26334f","level":"info","message":"Ação registrada","timestamp":"2025-06-12T16:44:30.270Z","userId":"67fee92a4ec3cbe3b71054db"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:44:30.274Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:44:30.364Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:44:37.182Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:44:37.203Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:37.206Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:37.211Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-12T16:44:37.236Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:44:37.252Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:44:37.284Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:44:37.315Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:53:24.470Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:53:24.559Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:53:25.112Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:53:25.135Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:53:25.158Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:53:25.160Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-12T16:53:25.184Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-12T16:53:25.205Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:53:25.239Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:53:25.241Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:54:35.039Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports?page=1&limit=5","timestamp":"2025-06-12T16:54:35.061Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:54:35.067Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:54:35.068Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-12T16:54:35.091Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-12T16:54:35.092Z"}
+{"code":"ECONNRESET","errno":-4077,"level":"error","message":"Erro na conexão com Redis: read ECONNRESET","stack":"Error: read ECONNRESET\n    at TLSWrap.onStreamRead (node:internal/stream_base_commons:218:20)","syscall":"read","timestamp":"2025-06-12T17:50:48.571Z"}
+{"level":"warn","message":"Conexão com Redis fechada","timestamp":"2025-06-12T17:50:48.576Z"}
+{"level":"info","message":"Tentando reconectar ao Redis...","timestamp":"2025-06-12T17:50:48.577Z"}
+{"level":"info","message":"Conectado ao Redis com sucesso","timestamp":"2025-06-12T17:50:49.790Z"}
+{"host":"prepared-polliwog-27272.upstash.io","level":"info","message":"Iniciando conexão com Redis:","port":6379,"timestamp":"2025-06-14T23:58:21.128Z","tls":true}
+{"level":"info","message":"Conectado ao Redis com sucesso","timestamp":"2025-06-14T23:58:21.213Z"}
+{"level":"info","message":"Conexão com Redis inicializada com sucesso","timestamp":"2025-06-14T23:58:21.256Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-14T23:58:21.274Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-14T23:58:21.286Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-14T23:58:21.335Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-14T23:58:21.352Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-14T23:58:21.365Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-14T23:58:21.387Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/agenda/future","timestamp":"2025-06-14T23:58:21.395Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/agenda/future com duração de 300 segundos","timestamp":"2025-06-14T23:58:21.417Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-14T23:58:21.461Z"}
+{"host":"prepared-polliwog-27272.upstash.io","level":"info","message":"Iniciando conexão com Redis:","port":6379,"timestamp":"2025-06-15T00:05:28.029Z","tls":true}
+{"level":"info","message":"Conectado ao Redis com sucesso","timestamp":"2025-06-15T00:05:28.143Z"}
+{"level":"info","message":"Conexão com Redis inicializada com sucesso","timestamp":"2025-06-15T00:05:28.186Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:05:28.206Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/categories/stats/exercises com duração de 300 segundos","timestamp":"2025-06-15T00:05:28.312Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:08:56.674Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:08:56.686Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patient-reports/stats com duração de 300 segundos","timestamp":"2025-06-15T00:08:56.727Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/patients?page=1&limit=5 com duração de 300 segundos","timestamp":"2025-06-15T00:08:56.749Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:08:56.753Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:08:56.781Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:08:56.784Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/agenda/future com duração de 300 segundos","timestamp":"2025-06-15T00:08:56.806Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:08:56.850Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:02.628Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:09:02.655Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:09:02.658Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:09:02.695Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:08.173Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:09:08.175Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:09:08.177Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:09:08.203Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:35.862Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:09:35.864Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:09:35.865Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:09:36.168Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:57.302Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:09:57.305Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:09:57.307Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:57.346Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:09:57.350Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:09:57.353Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:09:57.356Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:09:57.393Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:58.486Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/agenda","timestamp":"2025-06-15T00:09:58.489Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:09:58.534Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/agenda com duração de 300 segundos","timestamp":"2025-06-15T00:09:58.579Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda","timestamp":"2025-06-15T00:09:58.663Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:10:04.071Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:10:04.076Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:10:04.078Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:10:04.100Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:10:04.102Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:10:04.104Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:10:04.111Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:10:04.148Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:13:20.116Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:13:20.122Z"}
+{"level":"info","message":"Cache MISS para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:13:20.125Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patients?page=1&limit=5","timestamp":"2025-06-15T00:13:20.138Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/patient-reports/stats","timestamp":"2025-06-15T00:13:20.152Z"}
+{"level":"info","message":"Cache SET para a chave: __express__/categories/stats/exercises com duração de 300 segundos","timestamp":"2025-06-15T00:13:20.173Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/categories/stats/exercises","timestamp":"2025-06-15T00:13:20.198Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:13:20.203Z"}
+{"level":"info","message":"Cache HIT para a chave: __express__/agenda/future","timestamp":"2025-06-15T00:13:20.236Z"}
